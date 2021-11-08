@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../screens/categories_screen.dart';
 import '../screens/crypto_currency_screen.dart';
 import '../screens/crypto_detail_screen.dart';
