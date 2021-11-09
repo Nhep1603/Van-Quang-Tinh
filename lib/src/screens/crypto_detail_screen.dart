@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/constants.dart' as constant;
+import '../constants/constants.dart' as constants;
 
 class CryptoDetailScreen extends StatelessWidget {
   const CryptoDetailScreen({Key? key}) : super(key: key);
@@ -33,13 +33,13 @@ class CryptoDetailScreen extends StatelessWidget {
           SizedBox(
             width: symbolImageWidth,
             child: Image.asset(
-              constant.CryptoDetailScreen.symbolImage,
+              constants.CryptoDetailScreen.symbolImagePath,
               scale: 2.2,
             ) ,
           ),
           Align(
             child: Text(
-              constant.CryptoDetailScreen.titleAppBar,
+              constants.CryptoDetailScreen.titleAppBar,
               style: Theme.of(context).textTheme.subtitle1!.copyWith(
                     fontWeight: FontWeight.w900,
                     letterSpacing: 0.45,
@@ -50,7 +50,6 @@ class CryptoDetailScreen extends StatelessWidget {
           const Spacer(),
         ],
       ),
-      body: const Text('data'),
     );
   }
 }
