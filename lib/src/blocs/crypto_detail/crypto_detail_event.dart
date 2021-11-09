@@ -1,4 +1,4 @@
-part of 'crypto_detail_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class CryptoDetailEvent extends Equatable {
   const CryptoDetailEvent();

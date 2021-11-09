@@ -1,8 +1,8 @@
-part of 'crypto_detail_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class CryptoDetailState extends Equatable {
   const CryptoDetailState();
-  
+
   @override
   List<Object> get props => [];
 }
