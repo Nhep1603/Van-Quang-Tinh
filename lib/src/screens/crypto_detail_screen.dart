@@ -67,8 +67,10 @@ class CryptoDetailScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const CurrencyConverSionTextField(
-                  labelText: constants.CryptoDetailScreen.bitcoinSymbol,
+                const Flexible(
+                  child: CurrencyConverSionTextField(
+                    labelText: constants.CryptoDetailScreen.bitcoinSymbol,
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -78,10 +80,12 @@ class CryptoDetailScreen extends StatelessWidget {
                     color: Colors.lightGreen.shade300,
                   ),
                 ),
-                const CurrencyConverSionTextField(
-                  labelText: constants.CryptoDetailScreen.usd,
-                  isCrypto: false,
-                  currentPrice: constants.CryptoDetailScreen.currentPrice,
+                const Flexible(
+                  child: CurrencyConverSionTextField(
+                    labelText: constants.CryptoDetailScreen.usd,
+                    isCrypto: false,
+                    currentCryptoPrice: constants.CryptoDetailScreen.currentPrice,
+                  ),
                 ),
               ],
             ),
