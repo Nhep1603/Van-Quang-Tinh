@@ -20,11 +20,11 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.white,
             bottom: TabBar(
-                labelColor: constants.HomeScreen.colorOfTextAndIndicator,
+                labelColor: constants.ColorConstants.colorOfTextAndIndicator,
                 unselectedLabelColor: Colors.black,
                 labelStyle:
                     const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
-                indicatorColor: constants.HomeScreen.colorOfTextAndIndicator,
+                indicatorColor: constants.ColorConstants.colorOfTextAndIndicator,
                 tabs: _tabs
                     .map((tab) => Tab(
                           text: tab,

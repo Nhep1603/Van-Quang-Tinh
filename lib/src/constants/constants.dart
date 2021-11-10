@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen {
-  static const colorOfTextAndIndicator = Color(0xff8FC746);
-  
   static const String cryptoCurrency = 'Cryptocurrency';
   static const String categories = 'Categories';
 }
@@ -18,3 +16,6 @@ class CryptoDetailScreen {
   static const String titleAppBar = 'Bitcoin (BTC)';
 }
 
+class ColorConstants {
+  static const colorOfTextAndIndicator = Color(0xff8FC746);
+}
