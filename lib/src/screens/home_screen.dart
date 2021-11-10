@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
                 labelColor: constants.HomeScreen.colorOfTextAndIndicator,
                 unselectedLabelColor: Colors.black,
                 labelStyle:
-                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                 indicatorColor: constants.HomeScreen.colorOfTextAndIndicator,
                 tabs: _tabs
                     .map((tab) => Tab(

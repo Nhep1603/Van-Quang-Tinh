@@ -4,7 +4,7 @@ import 'package:van_quang_tinh/src/app.dart';
 
 void main() {
   const colorOfTextAndIndicator = Color(0xff8FC746);
-  const labelStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 16);
+  const labelStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 18);
   final _tabs = ['Cryptocurrency', 'Categories'];
 
   var widget = const MaterialApp(
