@@ -1,4 +1,7 @@
-class HomeScreen {}
+class HomeScreen {
+  static const String logoLink = "assets/images/logo.png";
+  static const int searchButtonColor = 0xff4b4b4b;
+  }
 
 class CategoriesScreen {}
 
