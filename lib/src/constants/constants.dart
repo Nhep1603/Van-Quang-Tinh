@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class HomeScreen {
   static const String cryptoCurrency = 'Cryptocurrency';
   static const String categories = 'Categories';
-}
+  static const String logoLink = "assets/images/logo.png";
+  static const int searchButtonColor = 0xff4b4b4b;
+  }
 
 class CategoriesScreen {}
 
