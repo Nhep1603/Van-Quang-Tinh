@@ -25,12 +25,12 @@ class CurrencyConverSionTextField extends StatelessWidget {
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
         hintText: isCrypto && currentCryptoPrice == null
-            ? CustomNumberFormat.customNumberFormatWithoutCommas.format(1)
-            : CustomNumberFormat.customNumberFormatWithoutCommas
-                .format(currentCryptoPrice),
-        hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+            ? CustomNumberFormat.customNumberFormatWithoutCommas(1)
+            : CustomNumberFormat.customNumberFormatWithoutCommas(
+                currentCryptoPrice),
+        hintStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
               color: Colors.grey.shade700,
-              fontSize: 16.0,
+              fontWeight: FontWeight.w500,
             ),
         icon: isCrypto
             ? Text(

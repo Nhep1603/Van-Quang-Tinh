@@ -1,6 +1,11 @@
 import 'package:intl/intl.dart';
 
 class CustomNumberFormat {
-  static NumberFormat customNumberFormat = NumberFormat("#,###.00", "en_US");
-  static NumberFormat customNumberFormatWithoutCommas = NumberFormat("#.00", "en_US");
+  static String customNumberFormatWithCommas(dynamic number) {
+    return NumberFormat("#,###.00", "en_US").format(number);
+  }
+
+  static String customNumberFormatWithoutCommas(dynamic number) {
+    return NumberFormat("#.00", "en_US").format(number);
+  }
 }

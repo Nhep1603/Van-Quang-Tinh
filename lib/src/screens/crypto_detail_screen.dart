@@ -35,7 +35,7 @@ class CryptoDetailScreen extends StatelessWidget {
                 width: curentPriceLeftPadding,
               ),
               Text(
-                '\$${CustomNumberFormat.customNumberFormat.format(constants.CryptoDetailScreen.currentPrice)}',
+                '\$${CustomNumberFormat.customNumberFormatWithCommas(constants.CryptoDetailScreen.currentPrice)}',
                 style: Theme.of(context).textTheme.headline4!.copyWith(
                       fontSize: 38.0,
                       color: Colors.black87,
