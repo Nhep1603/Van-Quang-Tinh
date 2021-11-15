@@ -27,6 +27,8 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
   double horizontalMargin = 2;
   double dataRowHeight = 50;
   double headingRowHeight = 50;
+  double widthOfImage = 20;
+  double heightOfImage = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +75,8 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                               children: [
                                 Image.asset(
                                   model.image,
-                                  width: 20,
-                                  height: 20,
+                                  width: widthOfImage,
+                                  height: heightOfImage,
                                 ),
                                 const SizedBox(
                                   height: 3,
