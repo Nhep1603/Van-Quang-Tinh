@@ -8,4 +8,8 @@ class CustomNumberFormat {
   static String customNumberFormatWithoutCommas(dynamic number) {
     return NumberFormat("#.00", "en_US").format(number);
   }
+
+    static String customNumberFormatWithoutDots(dynamic number) {
+    return NumberFormat("#,###", "en_US").format(number);
+  }
 }
