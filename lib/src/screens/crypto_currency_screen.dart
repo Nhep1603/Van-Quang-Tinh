@@ -13,7 +13,8 @@ class CryptoCurrencyScreen extends StatefulWidget {
   State<CryptoCurrencyScreen> createState() => _CryptoCurrencyScreenState();
 }
 
-class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
+class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
+    with AutomaticKeepAliveClientMixin {
   final columns = [
     constants.CryptoCurrencyScreen.numberHeading,
     constants.CryptoCurrencyScreen.coinHeading,
@@ -78,9 +79,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
                                   width: widthOfImage,
                                   height: heightOfImage,
                                 ),
-                                const SizedBox(
-                                  height: 3,
-                                ),
+                                const SizedBox(height: 3),
                                 Text(
                                   model.symbol.toUpperCase(),
                                   style: Theme.of(context)
@@ -120,6 +119,9 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
   // void onSort(int columnIndex, bool ascending) {
   //   if (columnIndex == 2) {

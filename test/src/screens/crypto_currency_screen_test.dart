@@ -21,7 +21,7 @@ void main() {
     expect(scrollableFinder, findsOneWidget);
   });
 
-  testWidgets('DataTable have 5 columns', (WidgetTester tester) async {
+  testWidgets('DataTable have 5 columns', (tester) async {
     await tester.pumpWidget(widget);
 
     final columnsFinder =
@@ -32,8 +32,7 @@ void main() {
     expect(columnsFinder, 5);
   });
 
-  testWidgets('Display correctly DataTable\'s column spacing',
-      (WidgetTester tester) async {
+  testWidgets('Display correctly DataTable\'s column spacing', (tester) async {
     await tester.pumpWidget(widget);
 
     final columnSpacingFinder =
@@ -43,7 +42,7 @@ void main() {
   });
 
   testWidgets('Display correctly DataTable\'s horizontal margin',
-      (WidgetTester tester) async {
+      (tester) async {
     await tester.pumpWidget(widget);
 
     final horizontalMarginFinder =
@@ -53,8 +52,7 @@ void main() {
     expect(horizontalMarginFinder, horizontalMargin);
   });
 
-  testWidgets('Display correctly DataTable\'s data row height',
-      (WidgetTester tester) async {
+  testWidgets('Display correctly DataTable\'s data row height', (tester) async {
     await tester.pumpWidget(widget);
 
     final dataRowHeightFinder =
@@ -64,7 +62,7 @@ void main() {
   });
 
   testWidgets('Display correctly DataTable\'s heading row height',
-      (WidgetTester tester) async {
+      (tester) async {
     await tester.pumpWidget(widget);
 
     final headingRowHeightFinder =
@@ -75,7 +73,7 @@ void main() {
   });
 
   testWidgets('DataTable have the same number of rows as the number of data',
-      (WidgetTester tester) async {
+      (tester) async {
     await tester.pumpWidget(widget);
 
     final rowsFinder =
