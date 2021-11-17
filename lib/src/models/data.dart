@@ -1,4 +1,5 @@
-import 'category.dart';
+import './category.dart';
+import './crypto.dart';
 
 var data = [
   const Category(
@@ -10,14 +11,14 @@ var data = [
   const Category(
     id : "2",
     name: "Exchange-based Tokens",
-    marketCap: 182708546279.32834,
+    marketCap: 0,
     marketCapChange24h: -3.934820635864761
   ),
   const Category(
     id : "3",
     name: "Decentralized Finance (DeFi)",
     marketCap: 172812484359.5981,
-    marketCapChange24h: -2.897486711245969
+    marketCapChange24h: 0
   ),
   const Category(
     id : "4",
@@ -91,4 +92,80 @@ var data = [
         marketCap: 31200534747.805313,
         marketCapChange24h : -2.9832167806035237
     )
+];
+
+
+var dataCrypto = [
+
+  const Crypto(
+
+      id: 'bitcoin',
+
+      name: 'Bitcoin',
+
+      symbol: 'BTC',
+
+      image: 'assets/images/bitcoin_symbol.png',
+
+      currentPrice: 6244545187,
+
+      marketCap: 11792271952844,
+
+      marketCapRank: 1,
+
+      priceChangePercentage24h: -1.0),
+
+  const Crypto(
+
+      id: 'ethereum',
+
+      name: 'Ethereum',
+
+      symbol: 'ETH',
+
+      image: 'assets/images/bitcoin_symbol.png',
+
+      currentPrice: 455161,
+
+      marketCap: 539494258756,
+
+      marketCapRank: 2,
+
+      priceChangePercentage24h: -0.8),
+      const Crypto(
+
+      id: 'binancecoin',
+
+      name: 'Binance Coin"',
+
+      symbol: 'BNC',
+
+      image: 'assets/images/bitcoin_symbol.png',
+
+      currentPrice: 63483,
+
+      marketCap: 107029922901,
+
+      marketCapRank: 3,
+
+      priceChangePercentage24h:  3.0888),
+
+  const Crypto(
+
+      id: 'tether',
+
+      name: 'Tether',
+
+      symbol: 'USDT',
+
+      image: 'assets/images/bitcoin_symbol.png',
+
+      currentPrice: 10,
+
+      marketCap: 74972785921,
+
+      marketCapRank: 4,
+
+      priceChangePercentage24h:  0.92313),
+
 ];

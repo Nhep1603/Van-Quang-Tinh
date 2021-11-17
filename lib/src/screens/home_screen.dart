@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../constants/constants.dart' as constants;
-import '../screens/crypto_currency_screen.dart' as crypto;
+import '../models/data.dart';
 import '../screens/categories_screen.dart' as category;
+import '../screens/crypto_currency_screen.dart' as crypto;
+import '../screens/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key, this.onPressed}) : super(key: key);
-  final VoidCallback? onPressed;
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double logoSize = MediaQuery.of(context).size.height * .045;
+    double logoSize = MediaQuery.of(context).size.height * .05;
     double toolBarSize = MediaQuery.of(context).size.height * .085;
     double iconSize = MediaQuery.of(context).size.height * .035;
     final _tabs = [
@@ -36,7 +37,12 @@ class HomeScreen extends StatelessWidget {
                 iconSize: iconSize,
                 color: const Color(constants.HomeScreen.searchButtonColor),
                 icon: const Icon(Icons.search),
-                onPressed: onPressed,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SearchScreen(dataCrypto: dataCrypto,)),
+                  );
+                },
               ),
             ],
             bottom: TabBar(

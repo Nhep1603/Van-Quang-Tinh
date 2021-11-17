@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 class Category extends Equatable {
-final String? id;
-final String? name;
-final double? marketCap;
-final double? marketCapChange24h;
+final String id;
+final String name;
+final double marketCap;
+final double marketCapChange24h;
 
 const Category({
 required this.id,

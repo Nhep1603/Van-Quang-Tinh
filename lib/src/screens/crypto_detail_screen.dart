@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/custom_app_bar.dart';
 import '../constants/constants.dart' as constants;
+import '../widgets/custom_app_bar.dart';
 
 class CryptoDetailScreen extends StatelessWidget {
   const CryptoDetailScreen({Key? key}) : super(key: key);

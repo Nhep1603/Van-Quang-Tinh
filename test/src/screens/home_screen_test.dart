@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:van_quang_tinh/src/app.dart';
 import 'package:van_quang_tinh/src/screens/home_screen.dart';
 import 'package:van_quang_tinh/src/constants/constants.dart' as app_constant;
+import 'package:mocktail/mocktail.dart';
+
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+
+class MyTypeFake extends Fake implements Route {}
 
 void main() {
   const colorOfTextAndIndicator = Color(0xff8FC746);
@@ -171,6 +177,12 @@ void main() {
   }
   );
 
+  testWidgets('Display correctly Image height', (WidgetTester tester) async{
+    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
+    expect((tester.firstWidget(find.byType(Image)) as Image).height, 30.0);
+  }
+  );
+
   testWidgets('Display search button', (WidgetTester tester) async{
     await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
     final iconFinder = find.byType(IconButton);
@@ -217,7 +229,25 @@ void main() {
     await tester.tap(iconButtonFinder);
     expect(isTapped, true);
   });
+
+  NavigatorObserver mockObserver;
+  mockObserver = MockNavigatorObserver();
+  setUpAll(() {
+    registerFallbackValue(MyTypeFake());
   });
+  testWidgets('Navigator push to SearchScreen', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: const HomeScreen(),
+      navigatorObservers: [mockObserver],
+    ));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(IconButton));
+    await tester.pumpAndSettle();
+    verify(() => mockObserver.didPush(any(), any()));
+  });
+
+});
+
 }
   
 

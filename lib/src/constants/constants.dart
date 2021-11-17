@@ -4,14 +4,17 @@ class HomeScreen {
   static const String cryptoCurrency = 'Cryptocurrency';
   static const String categories = 'Categories';
   static const String logoLink = "assets/images/coingecko_logo.png";
+  static const String aroundLogoLink = "assets/images/coingecko_around_logo.png";
+
   static const int searchButtonColor = 0xff4b4b4b;
 }
 
 class CategoriesScreen {
-  static const String cloumn1Name = '#';
-  static const String cloumn2Name = 'Category';
-  static const String cloumn3Name = '24H';
-  static const String cloumn4Name = 'Market Cap';
+  static const String columnNumber = '#';
+  static const String columnCategory = 'Category';
+  static const String columnTime = '24H';
+  static const String columnMarketCap = 'Market Cap';
+  static const String checkEqualZeroText = '-';
 
   static const double columnSpacing = 18.0;
   static const double horizontalMargin = 10.0;
@@ -42,4 +45,9 @@ class CryptoDetailScreen {
 
 class ColorConstants {
   static const colorOfTextAndIndicator = Color(0xff8FC746);
+}
+
+class SearchScreen{
+  static const String title = 'Search';
+  static const String hintText = 'Enter coins';
 }
