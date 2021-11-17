@@ -33,6 +33,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: DataTable(
@@ -55,6 +56,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                       title: column,
                     )))
                 .toList(),
+                
             rows: dataCrypto
                 .map((model) => DataRow(
                         onSelectChanged: (_) {
@@ -93,17 +95,14 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                           DataCell(Align(
                               alignment: Alignment.centerRight,
                               child: Text('\$ ${model.currentPrice}',
-                                  style:
-                                      Theme.of(context).textTheme.subtitle2))),
+                                  style:Theme.of(context).textTheme.subtitle2))),
                           DataCell(Align(
                             alignment: Alignment.center,
                             child: Text(
                               '${model.priceChangePercentage24h.toStringAsFixed(1)}%',
                               style: TextStyle(
                                   fontSize: 15,
-                                  color: model.priceChangePercentage24h
-                                              .toDouble() >
-                                          0
+                                  color: model.priceChangePercentage24h.toDouble() > 0
                                       ? Colors.green
                                       : Colors.red),
                             ),
@@ -112,8 +111,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                               alignment: Alignment.centerRight,
                               child: Text(
                                   '\$ ${CustomNumberFormat.customNumberFormatWithoutDots(model.marketCap)}',
-                                  style:
-                                      Theme.of(context).textTheme.subtitle2))),
+                                  style:Theme.of(context).textTheme.subtitle2))),
                         ]))
                 .toList()),
       ),

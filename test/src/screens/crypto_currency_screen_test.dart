@@ -1,9 +1,18 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-
+import 'package:mocktail/mocktail.dart';
 import 'package:van_quang_tinh/src/screens/crypto_currency_screen.dart';
 
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+
+class MyTypeFake extends Fake implements Route {}
+
 void main() {
+  NavigatorObserver mockObserver;
+  mockObserver = MockNavigatorObserver();
+  setUpAll(() {
+    registerFallbackValue(MyTypeFake());
+  });
   var widget = const MaterialApp(
     home: CryptoCurrencyScreen(),
   );
@@ -80,5 +89,31 @@ void main() {
         (tester.firstWidget(find.byType(DataTable)) as DataTable).rows.length;
 
     expect(rowsFinder, 4);
+  });
+
+
+// error
+  testWidgets('a have the same number of rows as the number of data',
+      (tester) async {
+    await tester.pumpWidget(widget);
+
+    await tester.pumpAndSettle();
+
+    final rowsFinder = (find.byType(DataRow));
+
+    expect(rowsFinder, findsNWidgets(4));
+  });
+
+
+// error
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: const CryptoCurrencyScreen(),
+      navigatorObservers: [mockObserver],
+    ));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(DataRow));
+    await tester.pumpAndSettle();
+    verify(() => mockObserver.didPush(any(), any())).called(1);
   });
 }
