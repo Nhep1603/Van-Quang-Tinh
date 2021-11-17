@@ -4,9 +4,9 @@ import 'package:van_quang_tinh/src/screens/crypto_detail_screen.dart';
 import 'package:van_quang_tinh/src/constants/constants.dart' as constants;
 
 void main() {
-  group('AppBar of Crypto Detail Screen Tests', () {
-    var widget = const MaterialApp(home: CryptoDetailScreen());
+  var widget = const MaterialApp(home: CryptoDetailScreen());
 
+  group('AppBar of Crypto Detail Screen Tests', () {
     testWidgets('Should render Appbar with PreferredSize widget.',
         (WidgetTester tester) async {
       await tester.pumpWidget(widget);
