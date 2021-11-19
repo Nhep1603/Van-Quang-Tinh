@@ -22,7 +22,7 @@ class CryptoDetailScreen {
 
   static const String symbolImagePath = 'assets/images/bitcoin_symbol.jpg';
   static const String logoImagePath = 'assets/images/coingecko_logo.png';
-  static const String sadlyEmojiImagePath = 'assets/images/sadly_emoji.png';
+  static const String sadEmojiImagePath = 'assets/images/sad_emoji.png';
   static const String smileEmojiImagePath = 'assets/images/smile_emoji.png';
   static const String titleAppBar = 'Bitcoin (BTC)';
   static const String bitcoinSymbol = 'BTC';

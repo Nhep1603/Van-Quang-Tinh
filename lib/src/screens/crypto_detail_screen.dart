@@ -31,7 +31,7 @@ class CryptoDetailScreen extends StatelessWidget {
     double logoImageHeight = 25.0;
     double textButtonsSectionHorizontalPaddingOfLineChart = 30.0;
     double voteBarSectionPadding = 20.0;
-    double sadlyEmojiImageRightPadding = 15.0;
+    double sadEmojiImageRightPadding = 15.0;
     double smileEmojiImageLeftPadding = 15.0;
     double voteBarHeight = 20.0;
 
@@ -229,10 +229,10 @@ class CryptoDetailScreen extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(
-                                    right: sadlyEmojiImageRightPadding),
+                                    right: sadEmojiImageRightPadding),
                                 child: Image.asset(
                                   constants
-                                      .CryptoDetailScreen.sadlyEmojiImagePath,
+                                      .CryptoDetailScreen.sadEmojiImagePath,
                                   height: constants
                                       .CryptoDetailScreen.emojiSmallImageHeight,
                                 ),
@@ -310,7 +310,7 @@ class CryptoDetailScreen extends StatelessWidget {
                               .read<CryptoDetailBloc>()
                               .add(CryptoDetailVoted()),
                           child: Image.asset(
-                            constants.CryptoDetailScreen.sadlyEmojiImagePath,
+                            constants.CryptoDetailScreen.sadEmojiImagePath,
                             height: constants
                                 .CryptoDetailScreen.emojiLargeImageHeight,
                           ),

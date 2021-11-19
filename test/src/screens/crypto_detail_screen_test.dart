@@ -189,22 +189,22 @@ void main() {
     });
 
     testWidgets(
-        'Should call CryptoDetailVoted event when [sadlyEmojiTextButton] is tapped.',
+        'Should call CryptoDetailVoted event when [sadEmojiTextButton] is tapped.',
         (tester) async {
       when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
 
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
-      final sadlyEmojiTextButtonFinder = find
+      final sadEmojiTextButtonFinder = find
           .ancestor(
             of: find.byType(Image),
             matching: find.byType(TextButton),
           )
           .first;
-      await tester.ensureVisible(sadlyEmojiTextButtonFinder);
+      await tester.ensureVisible(sadEmojiTextButtonFinder);
 
-      await tester.tap(sadlyEmojiTextButtonFinder);
+      await tester.tap(sadEmojiTextButtonFinder);
       await tester.pumpAndSettle();
 
       verify(() => cryptoDetailBloc.add(CryptoDetailVoted())).called(1);
