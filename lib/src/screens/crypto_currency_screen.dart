@@ -15,13 +15,7 @@ class CryptoCurrencyScreen extends StatefulWidget {
 
 class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
     with AutomaticKeepAliveClientMixin {
-  final columns = [
-    constants.CryptoCurrencyScreen.numberHeading,
-    constants.CryptoCurrencyScreen.coinHeading,
-    constants.CryptoCurrencyScreen.priceHeading,
-    constants.CryptoCurrencyScreen.priceChangeHeading,
-    constants.CryptoCurrencyScreen.marketCapHeading
-  ];
+
   double columnSpacing = 18;
   double horizontalMargin = 2;
   double dataRowHeight = 50;
@@ -45,7 +39,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                 fontSize: 16,
                 color: Colors.black87,
                 fontWeight: FontWeight.w800),
-            columns: columns
+            columns: constants.CryptoCurrencyScreen.cryptoCurrencyHeadingColumns
                 .map((column) => DataColumn(
                         label: HeadingRow(
                       title: column,
@@ -54,12 +48,10 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                 
             rows: dataCrypto
                 .map((model) => DataRow(
-                   key: ValueKey(model.id),
                         onSelectChanged: (_) {
                           Navigator.of(context).pushNamed(
                               RouteNames.cryptoDetail,
                               arguments: {constants.CryptoCurrencyScreen.idArgument: model.id});
-                               
                         },
                         cells: [
                           DataCell(Align(
