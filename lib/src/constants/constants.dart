@@ -37,4 +37,14 @@ class CryptoDetailScreen {
 
 class ColorConstants {
   static const colorOfTextAndIndicator = Color(0xff8FC746);
+  static const Color criptoPriceLineChartFlLineColor = Color(0xffcfd8dc);
+
+  static const List<Color> criptoPriceLineChartGradientColors = [
+    Color(0xffffffff),
+    Color(0xffffffff),
+    Color(0xff01579b),
+  ];
+  static const List<Color> criptoPriceLineChartGradientColorsLine = [
+    Color(0xff01579b),
+  ];
 }

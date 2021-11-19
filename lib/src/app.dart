@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import './screens/home_screen.dart';
 import './config/routes.dart';
 import './blocs/crypto_detail/crypto_detail_bloc.dart';
-import './blocs/crypto_detail/crypto_detail_event.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => CryptoDetailBloc()..add(CryptoDetailStarted()),
+          create: (context) => CryptoDetailBloc(),
         ),
       ],
       child: MaterialApp(

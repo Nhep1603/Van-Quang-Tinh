@@ -35,6 +35,8 @@ class CryptoDetailScreen extends StatelessWidget {
     double smileEmojiImageLeftPadding = 15.0;
     double voteBarHeight = 20.0;
 
+    context.read<CryptoDetailBloc>().add(CryptoDetailStarted());
+    
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
@@ -154,54 +156,62 @@ class CryptoDetailScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: textButtonsSectionHorizontalPaddingOfLineChart,
               ),
-              child: Row(
-                children: [
-                  TextButton(
-                    onPressed: () => context.read<CryptoDetailBloc>().add(
-                        const CryptoDetailLoadedChart(
-                            lineChartType: LineChartType.chart24H)),
-                    child:
-                        const Text(constants.CryptoDetailScreen.button24Hours),
-                    style: TextButton.styleFrom(
-                      backgroundColor: context.select((CryptoDetailBloc bloc) =>
-                              bloc.state.lineChartType ==
-                              LineChartType.chart24H)
-                          ? Colors.lightGreen.shade500
-                          : Colors.transparent,
-                      primary: context.select((CryptoDetailBloc bloc) =>
-                              bloc.state.lineChartType ==
-                              LineChartType.chart24H)
-                          ? Colors.white70
-                          : Colors.grey.shade700,
-                      minimumSize: const Size(10.0, 10.0),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () => context.read<CryptoDetailBloc>().add(
-                        const CryptoDetailLoadedChart(
-                            lineChartType: LineChartType.chart7D)),
-                    child: const Text(constants.CryptoDetailScreen.button7Days),
-                    style: TextButton.styleFrom(
-                      backgroundColor: context.select((CryptoDetailBloc bloc) =>
-                              bloc.state.lineChartType == LineChartType.chart7D)
-                          ? Colors.lightGreen.shade500
-                          : Colors.transparent,
-                      primary: context.select((CryptoDetailBloc bloc) =>
-                              bloc.state.lineChartType == LineChartType.chart7D)
-                          ? Colors.white70
-                          : Colors.grey.shade700,
-                      minimumSize: const Size(10.0, 10.0),
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    constants.CryptoDetailScreen.lineChartName,
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: Colors.grey.shade700,
-                          letterSpacing: 0.3,
+              child: BlocBuilder<CryptoDetailBloc, CryptoDetailState>(
+                builder: (context, state) {
+                  if (state is CryptoDetailLoadSucess) {
+                    return Row(
+                      children: [
+                        TextButton(
+                          onPressed: () => context.read<CryptoDetailBloc>().add(
+                              const CryptoDetailLoadedChart(
+                                  lineChartType: LineChartType.chart24H)),
+                          child: const Text(
+                              constants.CryptoDetailScreen.button24Hours),
+                          style: TextButton.styleFrom(
+                            backgroundColor:
+                                state.lineChartType == LineChartType.chart24H
+                                    ? Colors.lightGreen.shade500
+                                    : Colors.transparent,
+                            primary:
+                                state.lineChartType == LineChartType.chart24H
+                                    ? Colors.white70
+                                    : Colors.grey.shade700,
+                            minimumSize: const Size(10.0, 10.0),
+                          ),
                         ),
-                  ),
-                ],
+                        TextButton(
+                          onPressed: () => context.read<CryptoDetailBloc>().add(
+                              const CryptoDetailLoadedChart(
+                                  lineChartType: LineChartType.chart7D)),
+                          child: const Text(
+                              constants.CryptoDetailScreen.button7Days),
+                          style: TextButton.styleFrom(
+                            backgroundColor:
+                                state.lineChartType == LineChartType.chart7D
+                                    ? Colors.lightGreen.shade500
+                                    : Colors.transparent,
+                            primary:
+                                state.lineChartType == LineChartType.chart7D
+                                    ? Colors.white70
+                                    : Colors.grey.shade700,
+                            minimumSize: const Size(10.0, 10.0),
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          constants.CryptoDetailScreen.lineChartName,
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: Colors.grey.shade700,
+                                    letterSpacing: 0.3,
+                                  ),
+                        ),
+                      ],
+                    );
+                  }
+
+                  return const SizedBox.shrink();
+                },
               ),
             ),
             SizedBox(

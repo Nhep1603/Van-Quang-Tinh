@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class CryptoDetail extends Equatable {
+class CryptoDetail {
   final String id;
   final String symbol;
   final String name;
@@ -34,18 +32,9 @@ class CryptoDetail extends Equatable {
       marketData: CryptoMarketData.fromJson(map['market_data']),
     );
   }
-
-  @override
-  List<Object?> get props => [
-        id,
-        symbol,
-        name,
-        image,
-        marketData,
-      ];
 }
 
-class CryptoImage extends Equatable {
+class CryptoImage {
   final String small;
 
   const CryptoImage({
@@ -63,12 +52,9 @@ class CryptoImage extends Equatable {
       small: map['small'],
     );
   }
-
-  @override
-  List<Object?> get props => [small];
 }
 
-class CryptoMarketData extends Equatable {
+class CryptoMarketData {
   final CryptoCurrentPrice currentPrice;
   final double priceChangePercentage24h;
 
@@ -90,33 +76,24 @@ class CryptoMarketData extends Equatable {
       priceChangePercentage24h: map['price_change_percentage_24h'],
     );
   }
-
-  @override
-  List<Object?> get props => [
-        currentPrice,
-        priceChangePercentage24h,
-      ];
 }
 
-class CryptoCurrentPrice extends Equatable {
-  final int usd;
+class CryptoCurrentPrice {
+  final int usdPrice;
 
   const CryptoCurrentPrice({
-    required this.usd,
+    required this.usdPrice,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'usd': usd,
+      'usd': usdPrice,
     };
   }
 
   factory CryptoCurrentPrice.fromJson(Map<String, dynamic> map) {
     return CryptoCurrentPrice(
-      usd: map['usd'],
+      usdPrice: map['usd'],
     );
   }
-
-  @override
-  List<Object?> get props => [usd];
 }

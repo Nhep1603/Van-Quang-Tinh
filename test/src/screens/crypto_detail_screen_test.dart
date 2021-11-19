@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_bloc.dart';
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_event.dart';
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_state.dart';
@@ -84,8 +85,7 @@ void main() {
     testWidgets(
         'Should display one line chart for last 24 hours when crypto detail bloc state is CryptoDetailLoadSucess with [lineChartType: LineChartType.chart24H].',
         (tester) async {
-      when(() => cryptoDetailBloc.state)
-          .thenReturn(const CryptoDetailLoadSucess(
+      when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailLoadSucess(
         isVoted: false,
         lineChartType: LineChartType.chart24H,
       ));
@@ -105,8 +105,7 @@ void main() {
     testWidgets(
         'Should display one line chart for last 7 days when crypto detail bloc state is CryptoDetailLoadSucess with [lineChartType: LineChartType.chart7D].',
         (tester) async {
-      when(() => cryptoDetailBloc.state)
-          .thenReturn(const CryptoDetailLoadSucess(
+      when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailLoadSucess(
         isVoted: false,
         lineChartType: LineChartType.chart7D,
       ));
@@ -126,8 +125,7 @@ void main() {
     testWidgets(
         'Should display [thanksForYourVote] when crypto detail bloc state is CryptoDetailLoadSucess with [isVoted: true].',
         (tester) async {
-      when(() => cryptoDetailBloc.state)
-          .thenReturn(const CryptoDetailLoadSucess(
+      when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailLoadSucess(
         isVoted: true,
         lineChartType: LineChartType.chart24H,
       ));
@@ -143,7 +141,10 @@ void main() {
     testWidgets(
         'Should call CryptoDetailLoadedChart event when [button7days] is tapped.',
         (tester) async {
-      when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+      when(() => cryptoDetailBloc.state).thenReturn((CryptoDetailLoadSucess(
+        isVoted: true,
+        lineChartType: LineChartType.chart24H,
+      )));
 
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
@@ -159,13 +160,16 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(() => cryptoDetailBloc.add(const CryptoDetailLoadedChart(
-          lineChartType: LineChartType.chart7D))).called(1); 
+          lineChartType: LineChartType.chart7D))).called(1);
     });
 
     testWidgets(
         'Should call CryptoDetailLoadedChart event when [button24hours] is tapped.',
         (tester) async {
-      when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+      when(() => cryptoDetailBloc.state).thenReturn((CryptoDetailLoadSucess(
+        isVoted: true,
+        lineChartType: LineChartType.chart24H,
+      )));
 
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
@@ -192,10 +196,12 @@ void main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
-      final sadlyEmojiTextButtonFinder = find.ancestor(
-        of: find.byType(Image),
-        matching: find.byType(TextButton),
-      ).first;
+      final sadlyEmojiTextButtonFinder = find
+          .ancestor(
+            of: find.byType(Image),
+            matching: find.byType(TextButton),
+          )
+          .first;
       await tester.ensureVisible(sadlyEmojiTextButtonFinder);
 
       await tester.tap(sadlyEmojiTextButtonFinder);
@@ -212,10 +218,12 @@ void main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
-      final smileEmojiTextButtonFinder = find.ancestor(
-        of: find.byType(Image),
-        matching: find.byType(TextButton),
-      ).last;
+      final smileEmojiTextButtonFinder = find
+          .ancestor(
+            of: find.byType(Image),
+            matching: find.byType(TextButton),
+          )
+          .last;
       await tester.ensureVisible(smileEmojiTextButtonFinder);
 
       await tester.tap(smileEmojiTextButtonFinder);

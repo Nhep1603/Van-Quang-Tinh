@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_bloc.dart';
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_event.dart';
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_state.dart';
@@ -23,10 +24,10 @@ void main() {
   );
 
   blocTest(
-    'emits [CryptoDetailInitial] when [CryptoDetailStarted] is called',
+    'emits [CryptoDetailLoadSucess] when [CryptoDetailStarted] is called',
     build: () => CryptoDetailBloc(),
     act: (CryptoDetailBloc bloc) => bloc.add(CryptoDetailStarted()),
-    expect: () => [CryptoDetailInitial()],
+    expect: () => [CryptoDetailLoadSucess(isVoted: false, lineChartType: LineChartType.chart24H)],
   );
 
   blocTest(
@@ -34,7 +35,7 @@ void main() {
     build: () => CryptoDetailBloc(),
     act: (CryptoDetailBloc bloc) => bloc.add(CryptoDetailVoted()),
     expect: () => [
-      const CryptoDetailLoadSucess(
+      CryptoDetailLoadSucess(
         isVoted: true,
         lineChartType: LineChartType.chart24H,
       ),
@@ -47,7 +48,7 @@ void main() {
     act: (CryptoDetailBloc bloc) => bloc.add(
         const CryptoDetailLoadedChart(lineChartType: LineChartType.chart24H)),
     expect: () => [
-      const CryptoDetailLoadSucess(
+      CryptoDetailLoadSucess(
         isVoted: false,
         lineChartType: LineChartType.chart24H,
       ),
@@ -60,7 +61,7 @@ void main() {
     act: (CryptoDetailBloc bloc) => bloc.add(
         const CryptoDetailLoadedChart(lineChartType: LineChartType.chart7D)),
     expect: () => [
-      const CryptoDetailLoadSucess(
+      CryptoDetailLoadSucess(
         isVoted: false,
         lineChartType: LineChartType.chart7D,
       ),
