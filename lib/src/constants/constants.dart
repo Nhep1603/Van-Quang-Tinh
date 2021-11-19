@@ -15,6 +15,7 @@ class CryptoCurrencyScreen {
   static const String priceHeading = 'Price';
   static const String priceChangeHeading = '24H';
   static const String marketCapHeading = 'Market Cap';
+  static const String idArgument = 'id';
 }
 
 class CryptoDetailScreen {

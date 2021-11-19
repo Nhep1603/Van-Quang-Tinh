@@ -22,8 +22,6 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
     constants.CryptoCurrencyScreen.priceChangeHeading,
     constants.CryptoCurrencyScreen.marketCapHeading
   ];
-  int? sortColumnIndex;
-  bool isAscending = false;
   double columnSpacing = 18;
   double horizontalMargin = 2;
   double dataRowHeight = 50;
@@ -38,8 +36,6 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
       body: SingleChildScrollView(
         child: DataTable(
             showCheckboxColumn: false,
-            sortColumnIndex: sortColumnIndex,
-            sortAscending: isAscending,
             columnSpacing: columnSpacing,
             horizontalMargin: horizontalMargin,
             headingRowColor: MaterialStateProperty.all(Colors.grey.shade200),
@@ -51,7 +47,6 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                 fontWeight: FontWeight.w800),
             columns: columns
                 .map((column) => DataColumn(
-                        // onSort: onSort,
                         label: HeadingRow(
                       title: column,
                     )))
@@ -59,10 +54,12 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                 
             rows: dataCrypto
                 .map((model) => DataRow(
+                   key: ValueKey(model.id),
                         onSelectChanged: (_) {
                           Navigator.of(context).pushNamed(
                               RouteNames.cryptoDetail,
-                              arguments: {'id': model.id});
+                              arguments: {constants.CryptoCurrencyScreen.idArgument: model.id});
+                               
                         },
                         cells: [
                           DataCell(Align(
@@ -121,30 +118,4 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
   @override
   bool get wantKeepAlive => true;
 
-  // void onSort(int columnIndex, bool ascending) {
-  //   if (columnIndex == 2) {
-  //     dataCrypto.sort((data1, data2) {
-  //       return compareDouble(ascending, data1.currentPrice.toDouble(),
-  //           data2.currentPrice.toDouble());
-  //     });
-  //   } else if (columnIndex == 3) {
-  //     dataCrypto.sort((data1, data2) => compareDouble(
-  //         ascending,
-  //         data1.priceChangePercentage24h.toDouble(),
-  //         data2.priceChangePercentage24h.toDouble()));
-  //   } else if (columnIndex == 4) {
-  //     dataCrypto.sort((data1, data2) {
-  //       return compareDouble(
-  //           ascending, data1.marketCap.toDouble(), data2.marketCap.toDouble());
-  //     });
-  //   }
-
-  //   setState(() {
-  //     sortColumnIndex = columnIndex;
-  //     isAscending = ascending;
-  //   });
-  // }
-
-  // int compareDouble(bool ascending, double value1, double value2) =>
-  //     ascending ? value1.compareTo(value2) : value2.compareTo(value1);
 }
