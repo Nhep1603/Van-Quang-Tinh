@@ -1,16 +1,18 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:van_quang_tinh/src/config/routes.dart';
 import 'package:van_quang_tinh/src/screens/crypto_currency_screen.dart';
+import 'package:van_quang_tinh/src/screens/crypto_detail_screen.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 class MyTypeFake extends Fake implements Route {}
 
 void main() {
-  
-  var widget = const MaterialApp(
-    home: CryptoCurrencyScreen(),
+  var widget = MaterialApp(
+    routes: buildRoutes(),
+    home: const CryptoCurrencyScreen(),
   );
   double columnSpacing = 18;
   double horizontalMargin = 2;
@@ -85,5 +87,20 @@ void main() {
         (tester.firstWidget(find.byType(DataTable)) as DataTable).rows.length;
 
     expect(rowsFinder, 4);
+  });
+
+  testWidgets('Data Table should be tappable ', (tester) async {
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+
+    final dataTableFinder = find.byType(DataTable);
+
+    expect(dataTableFinder, findsOneWidget);
+
+    await tester.tap(dataTableFinder);
+
+    await tester.pumpAndSettle();
+
+    expect(find.byType(CryptoDetailScreen), findsOneWidget);
   });
 }
