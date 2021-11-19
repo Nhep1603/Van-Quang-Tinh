@@ -136,7 +136,7 @@ var dataCrypto = [
 
       id: 'binancecoin',
 
-      name: 'Binance Coin"',
+      name: 'Binance Coin',
 
       symbol: 'BNC',
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:van_quang_tinh/src/models/category.dart';
+import 'package:van_quang_tinh/src/models/crypto.dart';
 import 'package:van_quang_tinh/src/models/data.dart';
 import 'package:van_quang_tinh/src/screens/search_screen.dart';
 import 'package:mocktail/mocktail.dart';
@@ -117,9 +118,7 @@ void main() {
     verify(() => mockObserver.didPush(any(), any()));
   });
 
-  testWidgets(
-      'Should render Category\'s data in TextField',
-      (tester) async {
+  testWidgets('Should render Category\'s data in TextField', (tester) async {
     List<Category>.from(mockResponse.map((model) => Category.fromJson(model)));
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
@@ -129,12 +128,13 @@ void main() {
     expect(albumCardFinder, findsOneWidget);
   });
 
-  // testWidgets('Display Auto', (WidgetTester tester) async {
-  //   await tester.pumpWidget(const MaterialApp(
-  //     home: SearchScreen(),
-  //   ));
-  //   await tester.pumpAndSettle();
-  //   final appbarFinder = find.byType(Autocomplete);
-  //   expect(appbarFinder, findsOneWidget);
-  // });
+   testWidgets('Display AutoComplete widget', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(
+      home: SearchScreen(),
+    ));
+    await tester.pumpAndSettle();
+    final appbarFinder = find
+        .byType(Autocomplete<Crypto>(optionsBuilder: (_) => []).runtimeType);
+    expect(appbarFinder, findsOneWidget);
+  });
 }
