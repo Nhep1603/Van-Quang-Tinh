@@ -15,13 +15,12 @@ class CryptoCurrencyScreen extends StatefulWidget {
 
 class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
     with AutomaticKeepAliveClientMixin {
-
-  double columnSpacing = 18;
-  double horizontalMargin = 2;
-  double dataRowHeight = 50;
-  double headingRowHeight = 50;
-  double widthOfImage = 20;
-  double heightOfImage = 20;
+  final double _columnSpacing = 18;
+  final double _horizontalMargin = 2;
+  final double _dataRowHeight = 50;
+  final double _headingRowHeight = 50;
+  final double _widthOfImage = 20;
+  final double _heightOfImage = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -30,28 +29,26 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
       body: SingleChildScrollView(
         child: DataTable(
             showCheckboxColumn: false,
-            columnSpacing: columnSpacing,
-            horizontalMargin: horizontalMargin,
+            columnSpacing: _columnSpacing,
+            horizontalMargin: _horizontalMargin,
             headingRowColor: MaterialStateProperty.all(Colors.grey.shade200),
-            dataRowHeight: dataRowHeight,
-            headingRowHeight: headingRowHeight,
-            headingTextStyle: const TextStyle(
-                fontSize: 16,
-                color: Colors.black87,
-                fontWeight: FontWeight.w800),
+            dataRowHeight: _dataRowHeight,
+            headingRowHeight: _headingRowHeight,
+            headingTextStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.w800),
             columns: constants.CryptoCurrencyScreen.cryptoCurrencyHeadingColumns
                 .map((column) => DataColumn(
                         label: HeadingRow(
                       title: column,
                     )))
                 .toList(),
-                
             rows: dataCrypto
                 .map((model) => DataRow(
                         onSelectChanged: (_) {
-                          Navigator.of(context).pushNamed(
-                              RouteNames.cryptoDetail,
-                              arguments: {constants.CryptoCurrencyScreen.idArgument: model.id});
+                          Navigator.of(context)
+                              .pushNamed(RouteNames.cryptoDetail, arguments: {
+                            constants.CryptoCurrencyScreen.idArgument: model.id
+                          });
                         },
                         cells: [
                           DataCell(Align(
@@ -67,8 +64,8 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                               children: [
                                 Image.asset(
                                   model.image,
-                                  width: widthOfImage,
-                                  height: heightOfImage,
+                                  width: _widthOfImage,
+                                  height: _heightOfImage,
                                 ),
                                 const SizedBox(height: 3),
                                 Text(
@@ -84,23 +81,30 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                           DataCell(Align(
                               alignment: Alignment.centerRight,
                               child: Text('\$ ${model.currentPrice}',
-                                  style:Theme.of(context).textTheme.subtitle2))),
+                                  style:
+                                      Theme.of(context).textTheme.subtitle2))),
                           DataCell(Align(
                             alignment: Alignment.center,
                             child: Text(
                               '${model.priceChangePercentage24h.toStringAsFixed(1)}%',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: model.priceChangePercentage24h.toDouble() > 0
-                                      ? Colors.green
-                                      : Colors.red),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle2!
+                                  .copyWith(
+                                      fontSize: 15,
+                                      color: model.priceChangePercentage24h
+                                                  .toDouble() >
+                                              0
+                                          ? Colors.green
+                                          : Colors.red),
                             ),
                           )),
                           DataCell(Align(
                               alignment: Alignment.centerRight,
                               child: Text(
                                   '\$ ${CustomNumberFormat.customNumberFormatWithoutDots(model.marketCap)}',
-                                  style:Theme.of(context).textTheme.subtitle2))),
+                                  style:
+                                      Theme.of(context).textTheme.subtitle2))),
                         ]))
                 .toList()),
       ),
@@ -109,5 +113,4 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
 
   @override
   bool get wantKeepAlive => true;
-
 }
