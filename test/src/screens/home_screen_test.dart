@@ -5,10 +5,7 @@ import 'package:van_quang_tinh/src/app.dart';
 import 'package:van_quang_tinh/src/screens/home_screen.dart';
 import 'package:van_quang_tinh/src/constants/constants.dart' as app_constant;
 import 'package:mocktail/mocktail.dart';
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
-
-class MyTypeFake extends Fake implements Route {}
+import '../../src/common/common_mock.dart';
 
 void main() {
   const colorOfTextAndIndicator = Color(0xff8FC746);

@@ -34,7 +34,7 @@ class CoinSearch extends StatelessWidget {
                 hintText: constant.SearchScreen.hintText),
             controller: fieldTextEditingController,
             focusNode: fieldFocusNode,
-            style: const TextStyle(color: Colors.black, fontSize: 18),
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 18),
           );
         },
         optionsBuilder: (TextEditingValue textEditingValue) {

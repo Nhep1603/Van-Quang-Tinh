@@ -24,7 +24,7 @@ class SearchScreen extends StatelessWidget {
             leading: IconButton(
               icon: Icon(Icons.arrow_back, size: iconSize, color: Colors.black),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.maybePop(context);
               },
             ),
             title: const Text(
