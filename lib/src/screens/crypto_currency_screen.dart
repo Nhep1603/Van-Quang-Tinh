@@ -81,8 +81,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                           DataCell(Align(
                               alignment: Alignment.centerRight,
                               child: Text('\$ ${model.currentPrice}',
-                                  style:
-                                      Theme.of(context).textTheme.subtitle2))),
+                                  style:Theme.of(context).textTheme.subtitle2))),
                           DataCell(Align(
                             alignment: Alignment.center,
                             child: Text(
@@ -103,8 +102,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                               alignment: Alignment.centerRight,
                               child: Text(
                                   '\$ ${CustomNumberFormat.customNumberFormatWithoutDots(model.marketCap)}',
-                                  style:
-                                      Theme.of(context).textTheme.subtitle2))),
+                                  style:Theme.of(context).textTheme.subtitle2)))
                         ]))
                 .toList()),
       ),
