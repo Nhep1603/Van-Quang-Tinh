@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:van_quang_tinh/src/blocs/search/search_bloc.dart';
+import 'package:van_quang_tinh/src/blocs/search/search_event.dart';
+import 'package:van_quang_tinh/src/blocs/search/search_state.dart';
 
 import '../config/app_constants.dart';
 import '../constants/constants.dart' as constant;
 import '../models/crypto.dart';
 
 class CoinSearch extends StatelessWidget {
-  const CoinSearch({Key? key, this.dataCrypto}) : super(key: key);
-
-  final List<Crypto>? dataCrypto;
+  const CoinSearch({Key? key}) : super(key: key);
 
   static String _displayStringForOption(Crypto option) => option.name;
 
@@ -15,78 +17,104 @@ class CoinSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     double optionsViewBuilderwidth = MediaQuery.of(context).size.width * 0.9;
     double containerMargin = MediaQuery.of(context).size.height * .0275;
-   
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: containerMargin),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
-      child: Autocomplete<Crypto>(
-        displayStringForOption: _displayStringForOption,
-        fieldViewBuilder: (BuildContext context,
-            TextEditingController fieldTextEditingController,
-            FocusNode fieldFocusNode,
-            VoidCallback onFieldSubmitted) {
-          return TextField(
-            decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-                hintText: constant.SearchScreen.hintText),
-            controller: fieldTextEditingController,
-            focusNode: fieldFocusNode,
-            style: Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 18),
+    BlocProvider.of<SearchBloc>(context).add(SearchRequested());
+
+    return BlocBuilder<SearchBloc, SearchState>(
+      builder: (context, state) {
+        if (state is SearchLoadInProgress) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is SearchLoadFailure) {
+          return Container(
+            color: Colors.red,
+            alignment: Alignment.center,
+            child: Text(state.errorMessage!),
           );
-        },
-        optionsBuilder: (TextEditingValue textEditingValue) {
-          if (textEditingValue.text == '') {
-            return const Iterable<Crypto>.empty();
-          }
-          return dataCrypto!.where((Crypto option) {
-            return option.name
-                    .toString()
-                    .toLowerCase()
-                    .contains(textEditingValue.text.toLowerCase()) ||
-                option.symbol
-                    .toString()
-                    .toLowerCase()
-                    .contains(textEditingValue.text.toLowerCase());
-          });
-        },
-        optionsViewBuilder: (context, onSelected, options) {
-          return Align(
-            alignment: Alignment.topLeft,
-            child: Container(
-              color: Colors.white,
-              width: optionsViewBuilderwidth,
-              child: ListView.builder(
-                itemCount: options.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final Crypto option = options.elementAt(index);
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, RouteNames.cryptoDetail,
-                          arguments: option.id);
-                    },
-                    child: Card(
-                      child: ListTile(
-                        leading: Image.asset(
-                          option.image,
-                          errorBuilder: (context, error, strackTrace) =>
-                              const Icon(Icons.error),
-                        ),
-                        title: Text(
-                          option.name,
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
+        } else if (state is SearchLoadSucess) {
+          if (state.cryptos != null) {
+            return Container(
+              margin: EdgeInsets.symmetric(horizontal: containerMargin),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Autocomplete<Crypto>(
+                displayStringForOption: _displayStringForOption,
+                fieldViewBuilder: (BuildContext context,
+                    TextEditingController fieldTextEditingController,
+                    FocusNode fieldFocusNode,
+                    VoidCallback onFieldSubmitted) {
+                  return TextField(
+                    decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(),
+                        hintText: constant.SearchScreen.hintText),
+                    controller: fieldTextEditingController,
+                    focusNode: fieldFocusNode,
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle1!
+                        .copyWith(fontSize: 18),
+                  );
+                },
+                optionsBuilder: (TextEditingValue textEditingValue) {
+                  if (textEditingValue.text == '') {
+                    return const Iterable<Crypto>.empty();
+                  }
+                  return state.cryptos!.where((Crypto option) {
+                    return option.name
+                            .toString()
+                            .toLowerCase()
+                            .contains(textEditingValue.text.toLowerCase()) ||
+                        option.symbol
+                            .toString()
+                            .toLowerCase()
+                            .contains(textEditingValue.text.toLowerCase());
+                  });
+                },
+                optionsViewBuilder: (context, onSelected, options) {
+                  return Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      color: Colors.white,
+                      width: optionsViewBuilderwidth,
+                      child: ListView.builder(
+                        itemCount: options.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final Crypto option = options.elementAt(index);
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, RouteNames.cryptoDetail,
+                                  arguments: option.id);
+                            },
+                            child: Card(
+                              child: ListTile(
+                                leading: Image.asset(
+                                  option.image,
+                                  errorBuilder: (context, error, strackTrace) =>
+                                      const Icon(Icons.error),
+                                ),
+                                title: Text(
+                                  option.name,
+                                  style: Theme.of(context).textTheme.headline6,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   );
                 },
               ),
-            ),
-          );
-        },
-      ),
+            );
+          } else {
+            return const Center(child: Text('Crypto is NULL'));
+          }
+        }
+        return Container(
+          color: Colors.orange,
+        );
+      },
     );
   }
 }
