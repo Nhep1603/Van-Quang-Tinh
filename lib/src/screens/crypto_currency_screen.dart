@@ -32,7 +32,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<CryptoCurrencyBloc>(context).add(CryptoCurrencyRequested());
+    context.read<CryptoCurrencyBloc>().add(CryptoCurrencyRequested());
   }
 
   @override
@@ -51,114 +51,131 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
             );
           } else if (state is CryptoCurrencyLoadSucess) {
             if (state.cryptos != null) {
-              return SingleChildScrollView(
-                child: DataTable(
-                    showCheckboxColumn: false,
-                    columnSpacing: _columnSpacing,
-                    horizontalMargin: _horizontalMargin,
-                    headingRowColor:
-                        MaterialStateProperty.all(Colors.grey.shade200),
-                    dataRowHeight: _dataRowHeight,
-                    headingRowHeight: _headingRowHeight,
-                    headingTextStyle: Theme.of(context)
-                        .textTheme
-                        .subtitle1!
-                        .copyWith(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800),
-                    columns: constants
-                        .CryptoCurrencyScreen.cryptoCurrencyHeadingColumns
-                        .map((column) => DataColumn(
-                                label: HeadingRow(
-                              title: column,
-                            )))
-                        .toList(),
-                    rows: state.cryptos!
-                        .map((model) => DataRow(
-                                onSelectChanged: (_) {
-                                  Navigator.of(context).pushNamed(
-                                      RouteNames.cryptoDetail,
-                                      arguments: {
-                                        constants.CryptoCurrencyScreen
-                                            .idArgument: model.id
-                                      });
-                                },
-                                cells: [
-                                  DataCell(SizedBox(
-                                    width: _widthOfCellMarketRank,
-                                    child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          '${model.marketCapRank}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1,
+              return RefreshIndicator(
+                onRefresh: () async => context
+                    .read<CryptoCurrencyBloc>()
+                    .add(CryptoCurrencyRequested()),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      DataTable(
+                          showCheckboxColumn: false,
+                          columnSpacing: _columnSpacing,
+                          horizontalMargin: _horizontalMargin,
+                          headingRowColor:
+                              MaterialStateProperty.all(Colors.grey.shade200),
+                          dataRowHeight: _dataRowHeight,
+                          headingRowHeight: _headingRowHeight,
+                          headingTextStyle: Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .copyWith(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w800),
+                          columns: constants
+                              .CryptoCurrencyScreen.cryptoCurrencyHeadingColumns
+                              .map((column) => DataColumn(
+                                      label: HeadingRow(
+                                    title: column,
+                                  )))
+                              .toList(),
+                          rows: state.cryptos!
+                              .map((model) => DataRow(
+                                      onSelectChanged: (_) {
+                                        Navigator.of(context).pushNamed(
+                                            RouteNames.cryptoDetail,
+                                            arguments: {
+                                              constants.CryptoCurrencyScreen
+                                                  .idArgument: model.id
+                                            });
+                                      },
+                                      cells: [
+                                        DataCell(SizedBox(
+                                          width: _widthOfCellMarketRank,
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                '${model.marketCapRank}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1,
+                                              )),
                                         )),
-                                  )),
-                                  DataCell(SizedBox(
-                                    width: _widthOfCellCoin,
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.network(
-                                            model.image,
-                                            width: _widthOfImage,
-                                            height: _heightOfImage,
+                                        DataCell(SizedBox(
+                                          width: _widthOfCellCoin,
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Image.network(
+                                                  model.image,
+                                                  width: _widthOfImage,
+                                                  height: _heightOfImage,
+                                                ),
+                                                const SizedBox(height: 3),
+                                                Text(model.symbol.toUpperCase(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText2!
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold))
+                                              ],
+                                            ),
                                           ),
-                                          const SizedBox(height: 3),
-                                          Text(model.symbol.toUpperCase(),
+                                        )),
+                                        DataCell(SizedBox(
+                                          width: _widthOfCellPrice,
+                                          child: Align(
+                                              alignment: Alignment.centerRight,
+                                              child: Text(
+                                                  '\$${model.currentPrice}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle2!
+                                                      .copyWith(
+                                                          fontSize: 15,
+                                                          fontWeight: FontWeight
+                                                              .bold))),
+                                        )),
+                                        DataCell(SizedBox(
+                                          width: _widthOfCellPriceChange,
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              '${model.priceChangePercentage24h.toStringAsFixed(1)}%',
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText2!
+                                                  .subtitle2!
                                                   .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.bold))
-                                        ],
-                                      ),
-                                    ),
-                                  )),
-                                  DataCell(SizedBox(
-                                    width: _widthOfCellPrice,
-                                    child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Text('\$${model.currentPrice}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle2)),
-                                  )),
-                                  DataCell(SizedBox(
-                                    width: _widthOfCellPriceChange,
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        '${model.priceChangePercentage24h.toStringAsFixed(1)}%',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle2!
-                                            .copyWith(
-                                                fontSize: 15,
-                                                color:
-                                                    model.priceChangePercentage24h
-                                                                .toDouble() >
-                                                            0
-                                                        ? Colors.green
-                                                        : Colors.red),
-                                      ),
-                                    ),
-                                  )),
-                                  DataCell(Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Text(
-                                          '\$${CustomNumberFormat.customNumberFormatWithoutDots(model.marketCap)}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle2)))
-                                ]))
-                        .toList()),
+                                                      fontSize: 15,
+                                                      color: model.priceChangePercentage24h
+                                                                  .toDouble() >
+                                                              0
+                                                          ? Colors.green
+                                                          : Colors.red),
+                                            ),
+                                          ),
+                                        )),
+                                        DataCell(Align(
+                                            alignment: Alignment.centerRight,
+                                            child: Text(
+                                                '\$${CustomNumberFormat.customNumberFormatWithoutDots(model.marketCap)}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle2!
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold))))
+                                      ]))
+                              .toList()),
+                    ],
+                  ),
+                ),
               );
             } else {
               return const Center(child: Text('Crypto is NULL'));
