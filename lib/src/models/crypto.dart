@@ -1,24 +1,24 @@
 import 'package:equatable/equatable.dart';
 
 class Crypto extends Equatable {
-  final String? id;
-  final String? symbol;
-  final String? name;
-  final String? image;
-  final int? currentPrice;
-  final int? marketCap;
-  final int? marketCapRank;
-  final double? priceChangePercentage24h;
+  final String id;
+  final String symbol;
+  final String name;
+  final String image;
+  final num currentPrice;
+  final num marketCap;
+  final num marketCapRank;
+  final num priceChangePercentage24h;
 
   const Crypto({
-    this.id,
-    this.symbol,
-    this.name,
-    this.image,
-    this.currentPrice,
-    this.marketCap,
-    this.marketCapRank,
-    this.priceChangePercentage24h,
+    required this.id,
+    required this.symbol,
+    required this.name,
+    required this.image,
+    required this.currentPrice,
+    required this.marketCap,
+    required this.marketCapRank,
+    required this.priceChangePercentage24h,
   });
 
   Map<String, dynamic> toJson() {

@@ -34,17 +34,32 @@ class CategoriesScreen {
       TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 15);
 }
 
-class CryptoCurrencyScreen {}
+class CryptoCurrencyScreen {
+  static const String numberHeading = '#';
+  static const String coinHeading = 'Coin';
+  static const String priceHeading = 'Price';
+  static const String priceChangeHeading = '24H';
+  static const String marketCapHeading = 'Market Cap';
+
+  static const String idArgument = 'id';
+
+  static const cryptoCurrencyHeadingColumns = [
+    numberHeading,
+    coinHeading,
+    priceHeading,
+    priceChangeHeading,
+    marketCapHeading
+  ];
+}
 
 class CryptoDetailScreen {
   static const double toolbarHeight = 70.0;
   static const double lineChartHeight = 200.0;
   static const double emojiLargeImageHeight = 55.0;
   static const double emojiSmallImageHeight = 35.0;
-
   static const double priceChangePercentage24h = -0.5;
   static const double currentPrice = 62614;
-
+  
   static const String symbolImagePath = 'assets/images/bitcoin_symbol.jpg';
   static const String logoImagePath = 'assets/images/coingecko_logo.png';
   static const String sadEmojiImagePath = 'assets/images/sad_emoji.png';
