@@ -1,4 +1,11 @@
 {
     "ENV": "production",
-    "HOST_NAME": "coingecko.com"
+    "HOST_NAME": "api.coingecko.com",
+    "CRYPTO_CURRENCY_PATH": "/api/v3/coins",
+    "MARKET_PATH": "/markets",
+    "CURRENCY": "vs_currency",
+    "PER_PAGE": "per_page",
+    "PAGE": "page",
+    "SPARKLINE": "sparkline",
+    "ORDER": "order"
 }

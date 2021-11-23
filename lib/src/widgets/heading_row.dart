@@ -8,8 +8,7 @@ class HeadingRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Align(
-          alignment: Alignment.center,
+        child: Center(
       child: Text(title),
     ));
   }
