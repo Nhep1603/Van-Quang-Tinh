@@ -7,7 +7,7 @@ import 'package:van_quang_tinh/src/models/crypto.dart';
 import 'package:van_quang_tinh/src/models/data.dart';
 import 'package:van_quang_tinh/src/screens/search_screen.dart';
 import 'package:mocktail/mocktail.dart';
-import '../mock_data/category_mock_data.dart';
+import '../../mock_data/category_mock_data.dart';
 import '../../src/common/common_mock.dart';
 
 void main() {
