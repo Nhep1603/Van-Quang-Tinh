@@ -15,6 +15,7 @@ class CategoriesScreen {
   static const String columnTime = '24H';
   static const String columnMarketCap = 'Market Cap';
   static const String checkEqualZeroText = '-';
+  static const String checkNullNameText = 'N/A';
 
   static const double columnSpacing = 18.0;
   static const double horizontalMargin = 10.0;

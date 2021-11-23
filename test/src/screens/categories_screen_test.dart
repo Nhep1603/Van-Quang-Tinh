@@ -1,16 +1,167 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
+import 'package:van_quang_tinh/src/blocs/category/category_bloc.dart';
+import 'package:van_quang_tinh/src/blocs/category/category_state.dart';
+import 'package:van_quang_tinh/src/models/category.dart';
 import 'package:van_quang_tinh/src/screens/categories_screen.dart';
-import 'package:van_quang_tinh/src/widgets/categories_table.dart';
+import 'package:van_quang_tinh/src/services/category/category_service.dart';
+import '../../mock_data/category_mock_data.dart';
+import '../../common/common_mock.dart';
 
-void main() {
-  
-  testWidgets('Display CategoriesTable', (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home: CategoriesScreen(),));
-    final categoriestableFinder = find.byType(CategoriesTable);
-    expect(categoriestableFinder, findsOneWidget);
-  }
+main() {
+  final mockResponse = json.decode(mockCategorysData);
+
+  setUpAll(() {
+    registerFallbackValue(FakeCategoryState());
+    registerFallbackValue(FakeCategoryEvent());
+  });
+
+  late CategoryService categoryService;
+  late CategoryBloc categoryBloc;
+  var widget = MaterialApp(
+    home: MultiBlocProvider(
+        providers: [BlocProvider(create: (context) => categoryBloc)],
+        child: const CategoriesScreen()),
   );
 
+  setUp(() {
+    categoryService = MockCategoryService();
+    categoryBloc = MockCategoryBloc();
+  });
+
+  tearDown(() {
+    categoryBloc.close();
+  });
+
+  testWidgets(
+      'Should render a SingleChildScrollView when bloc state is [CryptoLoadSucess]',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+        categories: List<Category>.from(
+            mockResponse.map((model) => Category.fromJson(model)))));
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    final singleChildScrollViewFinder = find.byType(SingleChildScrollView);
+    expect(singleChildScrollViewFinder, findsOneWidget);
+  });
+
+  testWidgets('Should render a DataTable when bloc state is [CryptoLoadSucess]',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+        categories: List<Category>.from(
+            mockResponse.map((model) => Category.fromJson(model)))));
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    final datatableFinder = find.byType(DataTable);
+    expect(datatableFinder, findsOneWidget);
+  });
+
+  testWidgets(
+      'Display correctly DataTable\'s column spacing when bloc state is [CryptoLoadSucess]',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+        categories: List<Category>.from(
+            mockResponse.map((model) => Category.fromJson(model)))));
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    expect(
+        (tester.firstWidget(find.byType(DataTable)) as DataTable).columnSpacing,
+        18.0);
+  });
+
+  testWidgets(
+      'Display correctly DataTable\'s horizontal margin when bloc state is [CryptoLoadSucess]',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+        categories: List<Category>.from(
+            mockResponse.map((model) => Category.fromJson(model)))));
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    expect(
+        (tester.firstWidget(find.byType(DataTable)) as DataTable)
+            .horizontalMargin,
+        10.0);
+  });
+
+  testWidgets(
+      'Display correctly DataTable\'s data row height when bloc state is [CryptoLoadSucess]',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+        categories: List<Category>.from(
+            mockResponse.map((model) => Category.fromJson(model)))));
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    expect(
+        (tester.firstWidget(find.byType(DataTable)) as DataTable).dataRowHeight,
+        53.5);
+  });
+
+  testWidgets(
+      'Display correctly DataTable\'s heading row height when bloc state is [CryptoLoadSucess]',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+        categories: List<Category>.from(
+            mockResponse.map((model) => Category.fromJson(model)))));
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    expect(
+        (tester.firstWidget(find.byType(DataTable)) as DataTable)
+            .headingRowHeight,
+        50.0);
+  });
+
+  testWidgets('DataTable have 4 columns when bloc state is [CryptoLoadSucess]',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+        categories: List<Category>.from(
+            mockResponse.map((model) => Category.fromJson(model)))));
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    expect(
+        (tester.firstWidget(find.byType(DataTable)) as DataTable)
+            .columns
+            .length,
+        4);
+  });
+
+  testWidgets(
+      'Should render red container with error message when crypto bloc state is [CryptoLoadFailure]',
+      (tester) async {
+    when(() => categoryBloc.state)
+        .thenReturn(CategoryLoadFailure(errorMessage: 'errorMessage'));
+    await tester.pumpWidget(widget);
+    await tester.pump();
+    final errorMessageFinder = find.text('errorMessage');
+    expect(errorMessageFinder, findsOneWidget);
+    expect(
+        (tester.widget(find.byType(Container)) as Container).color, Colors.red);
+  });
+
+  testWidgets(
+      'Should render orange container with error message when not have any bloc state',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryInitial());
+    await tester.pumpWidget(widget);
+    await tester.pump();
+    expect((tester.widget(find.byType(Container)) as Container).color,
+        Colors.green);
+  });
+
+  testWidgets(
+      'Should have RefreshIndicator when bloc state is [CryptoLoadSucess]',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+        categories: List<Category>.from(
+            mockResponse.map((model) => Category.fromJson(model)))));
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    final datatableFinder = find.byType(RefreshIndicator);
+    expect(datatableFinder, findsOneWidget);
+  });
 }

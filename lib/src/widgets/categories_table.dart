@@ -76,7 +76,7 @@ class CategoriesTable extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: model.marketCap != 0
                             ? Text(
-                                '\$${CustomNumberFormat.customNumberFormatWithCommasAndHaveNoSurplus(model.marketCap)}',
+                                '\$${CustomNumberFormat.customNumberFormatWithoutDots(model.marketCap)}',
                                 style: constants
                                     .CategoriesScreen.columnMarketCapTextStyle)
                             : const Center(

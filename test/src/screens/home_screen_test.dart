@@ -160,26 +160,6 @@ void main() {
   }
   );
 
-  testWidgets('Display Image', (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    final imageFinder = find.byType(Image);
-    expect(imageFinder, findsOneWidget);
-  }
-  );
-
-  testWidgets('Display correctly Image\'s link', (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    final imageFinder = ((tester.widget(find.byType(Image)) as Image).image as AssetImage).assetName;
-    expect(imageFinder, app_constant.HomeScreen.logoLink);
-  }
-  );
-
-  testWidgets('Display correctly Image height', (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    expect((tester.firstWidget(find.byType(Image)) as Image).height, 30.0);
-  }
-  );
-
   testWidgets('Display search button', (WidgetTester tester) async{
     await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
     final iconFinder = find.byType(IconButton);

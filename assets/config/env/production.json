@@ -1,4 +1,6 @@
 {
     "ENV": "production",
-    "HOST_NAME": "coingecko.com"
+    "HOST_NAME": "api.coingecko.com",
+    "CRYPTO_PATH": "/api/v3/coins",
+    "CATEGORY_PATH": "/categories"
 }
