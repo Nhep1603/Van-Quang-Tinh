@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:van_quang_tinh/src/app.dart';
 import 'package:van_quang_tinh/src/screens/home_screen.dart';
 import 'package:van_quang_tinh/src/constants/constants.dart' as app_constant;
+import 'package:mocktail/mocktail.dart';
+import '../../src/common/common_mock.dart';
 
 void main() {
   const colorOfTextAndIndicator = Color(0xff8FC746);
-  const labelStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 18);
+  const labelStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 16);
   final _tabs = ['Cryptocurrency', 'Categories'];
 
   var widget = const MaterialApp(
@@ -137,7 +140,7 @@ void main() {
     });
   });
 
-
+ group('App bar Widget Testing', () {
   testWidgets('Display Appbar', (WidgetTester tester) async{
     await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
     final appbarFinder = find.byType(AppBar);
@@ -147,7 +150,7 @@ void main() {
 
   testWidgets('Display correctly Appbar\'s height', (WidgetTester tester) async{
     await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    expect((tester.firstWidget(find.byType(AppBar)) as AppBar).toolbarHeight, 66.0);
+    expect((tester.firstWidget(find.byType(AppBar)) as AppBar).toolbarHeight, 51.00000000000001);
   }
   );
 
@@ -171,6 +174,12 @@ void main() {
   }
   );
 
+  testWidgets('Display correctly Image height', (WidgetTester tester) async{
+    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
+    expect((tester.firstWidget(find.byType(Image)) as Image).height, 30.0);
+  }
+  );
+
   testWidgets('Display search button', (WidgetTester tester) async{
     await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
     final iconFinder = find.byType(IconButton);
@@ -182,7 +191,7 @@ void main() {
 
   testWidgets('Display correctly search button\'s size', (WidgetTester tester) async{
     await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    expect((tester.firstWidget(find.byType(IconButton)) as IconButton).iconSize, 24);
+    expect((tester.firstWidget(find.byType(IconButton)) as IconButton).iconSize, 21.000000000000004);
   }
   );
 
@@ -217,6 +226,25 @@ void main() {
     await tester.tap(iconButtonFinder);
     expect(isTapped, true);
   });
+
+  NavigatorObserver mockObserver;
+  mockObserver = MockNavigatorObserver();
+  setUpAll(() {
+    registerFallbackValue(MyTypeFake());
+  });
+  testWidgets('Navigator push to SearchScreen', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: const HomeScreen(),
+      navigatorObservers: [mockObserver],
+    ));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(IconButton));
+    await tester.pumpAndSettle();
+    verify(() => mockObserver.didPush(any(), any()));
+  });
+
+});
+
 }
   
 

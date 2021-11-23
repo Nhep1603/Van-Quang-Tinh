@@ -9,7 +9,7 @@ class CustomNumberFormat {
     return NumberFormat("#.00", "en_US").format(number);
   }
 
-    static String customNumberFormatWithoutDots(dynamic number) {
+   static String customNumberFormatWithoutDots(dynamic number) {
     return NumberFormat("#,###", "en_US").format(number);
   }
 }
