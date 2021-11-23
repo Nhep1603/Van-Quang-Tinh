@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../screens/search_screen.dart';
 import './app_constants.dart' as app_constants;
 import '../screens/categories_screen.dart';
 import '../screens/crypto_currency_screen.dart';
 import '../screens/crypto_detail_screen.dart';
 import '../screens/home_screen.dart';
+import '../screens/search_screen.dart';
 
 Map<String, WidgetBuilder> buildRoutes() {
   return {

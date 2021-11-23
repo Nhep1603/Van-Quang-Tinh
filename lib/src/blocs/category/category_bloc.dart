@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 
-import '../../services/category/category_service.dart';
 import './category_event.dart';
 import './category_state.dart';
+import '../../services/category/category_service.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final CategoryService? service;

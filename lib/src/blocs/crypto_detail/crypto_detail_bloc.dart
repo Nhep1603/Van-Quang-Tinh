@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 
-import '../../enum/line_chart_enum.dart';
 import './crypto_detail_event.dart';
 import './crypto_detail_state.dart';
+import '../../enum/line_chart_enum.dart';
 
 class CryptoDetailBloc extends Bloc<CryptoDetailEvent, CryptoDetailState> {
   bool _isVoted = false;

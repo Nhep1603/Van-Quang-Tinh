@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:van_quang_tinh/src/blocs/search/search_bloc.dart';
-import 'package:van_quang_tinh/src/blocs/search/search_event.dart';
-import 'package:van_quang_tinh/src/blocs/search/search_state.dart';
 
+import '../blocs/search/search_bloc.dart';
+import '../blocs/search/search_event.dart';
+import '../blocs/search/search_state.dart';
 import '../config/app_constants.dart';
 import '../constants/constants.dart' as constant;
 import '../models/crypto.dart';
@@ -11,7 +11,7 @@ import '../models/crypto.dart';
 class CoinSearch extends StatelessWidget {
   const CoinSearch({Key? key}) : super(key: key);
 
-  static String _displayStringForOption(Crypto option) => option.name;
+  static String displayStringForOption(Crypto option) => option.name;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class CoinSearch extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Autocomplete<Crypto>(
-                displayStringForOption: _displayStringForOption,
+                displayStringForOption: displayStringForOption,
                 fieldViewBuilder: (BuildContext context,
                     TextEditingController fieldTextEditingController,
                     FocusNode fieldFocusNode,

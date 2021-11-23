@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:van_quang_tinh/src/app.dart';
+import 'package:van_quang_tinh/src/blocs/search/search_bloc.dart';
+import 'package:van_quang_tinh/src/config/routes.dart';
 import 'package:van_quang_tinh/src/screens/home_screen.dart';
 import 'package:van_quang_tinh/src/constants/constants.dart' as app_constant;
 import 'package:mocktail/mocktail.dart';
@@ -12,8 +15,9 @@ void main() {
   const labelStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 16);
   final _tabs = ['Cryptocurrency', 'Categories'];
 
-  var widget = const MaterialApp(
-    home: App(),
+  var widget = MaterialApp(
+    routes: buildRoutes(),
+    home: const App(),
   );
 
   group('Tab bar Widget Testing', () {
@@ -213,15 +217,19 @@ void main() {
     registerFallbackValue(MyTypeFake());
   });
   testWidgets('Navigator push to SearchScreen', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: const HomeScreen(),
-      navigatorObservers: [mockObserver],
-    ));
-    await tester.pumpAndSettle();
-    await tester.tap(find.byType(IconButton));
-    await tester.pumpAndSettle();
-    verify(() => mockObserver.didPush(any(), any()));
-  });
+      await tester.pumpWidget(BlocProvider(
+        create: (context) => SearchBloc(),
+        child: MaterialApp(
+          routes: buildRoutes(),
+          home: const HomeScreen(),
+          navigatorObservers: [mockObserver],
+        ),
+      ));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(IconButton));
+      await tester.pumpAndSettle();
+      verify(() => mockObserver.didPush(any(), any()));
+    });
 
 });
 

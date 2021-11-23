@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import '../../services/crypto_currency/crypto_currency_service.dart';
 
+import '../../services/crypto_currency/crypto_currency_service.dart';
 import './search_event.dart';
 import './search_state.dart';
 

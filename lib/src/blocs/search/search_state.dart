@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:van_quang_tinh/src/models/crypto.dart';
+
+import '../../models/crypto.dart';
 
 
 abstract class SearchState extends Equatable {
