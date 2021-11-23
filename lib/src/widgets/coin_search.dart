@@ -88,7 +88,7 @@ class CoinSearch extends StatelessWidget {
                             },
                             child: Card(
                               child: ListTile(
-                                leading: Image.asset(
+                                leading: Image.network(
                                   option.image,
                                   errorBuilder: (context, error, strackTrace) =>
                                       const Icon(Icons.error),

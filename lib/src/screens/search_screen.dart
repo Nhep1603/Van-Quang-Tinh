@@ -31,6 +31,6 @@ class SearchScreen extends StatelessWidget {
               constant.SearchScreen.title,
               style: TextStyle(color: Colors.black),
             )),
-        body: CoinSearch(dataCrypto: dataCrypto));
+        body: const CoinSearch());
   }
 }
