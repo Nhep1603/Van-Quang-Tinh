@@ -45,17 +45,19 @@ class CustomAppBar extends StatelessWidget {
             scale: 2.2,
           ),
         ),
-        Align(
-          child: Text(
-            titleAppBar,
-            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 0.45,
-                  color: Colors.black87.withOpacity(0.6),
-                ),
+        Expanded(
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              titleAppBar,
+              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.45,
+                    color: Colors.black87.withOpacity(0.6),
+                  ),
+            ),
           ),
         ),
-        const Spacer(),
       ],
     );
   }
