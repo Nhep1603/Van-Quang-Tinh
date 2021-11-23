@@ -178,7 +178,7 @@ class _CryptoCurrencyScreenState extends State<CryptoCurrencyScreen>
                 ),
               );
             } else {
-              return const Center(child: Text('Crypto is NULL'));
+              return const Center(child: Text(constants.CryptoCurrencyScreen.errorWhenListCryptoCurrencyNull));
             }
           }
           return Container(
