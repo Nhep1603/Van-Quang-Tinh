@@ -11,7 +11,7 @@ void main() {
     final mockResponse = json.decode(mockCryptoData);
     final cryptos = List<Crypto>.from( mockResponse.map((model) => Crypto.fromJson(model)));
 
-    test('Should return a name', () {
+    test('Should return a name of category', () {
       expect(CoinSearch.displayStringForOption(cryptos.first), cryptos.first.name);
     });
   });

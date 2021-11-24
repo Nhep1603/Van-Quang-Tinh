@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/constants.dart' as constants;
+
 class LoadFailure extends StatelessWidget {
   final VoidCallback reload;
   const LoadFailure({Key? key, required this.reload}) : super(key: key);
@@ -14,18 +16,19 @@ class LoadFailure extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Cannot access data',
+            constants.LoadFailure.loadFailureText,
             style:
                 Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 17),
           ),
           TextButton(
               style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 18),
+                  textStyle: const TextStyle(
+                      fontSize: constants.LoadFailure.textButtonFontSize),
                   primary: Colors.green),
               onPressed: () async {
                 reload();
               },
-              child: const Text('Try again'))
+              child: const Text(constants.LoadFailure.loadFailureTryAgainText))
         ],
       ),
     );

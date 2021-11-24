@@ -7,23 +7,28 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:van_quang_tinh/src/blocs/category/category_bloc.dart';
 import 'package:van_quang_tinh/src/blocs/category/category_state.dart';
+import 'package:van_quang_tinh/src/config/routes.dart';
 import 'package:van_quang_tinh/src/models/category.dart';
 import 'package:van_quang_tinh/src/screens/categories_screen.dart';
 import 'package:van_quang_tinh/src/services/category/category_service.dart';
+import 'package:van_quang_tinh/src/widgets/load_failure.dart';
 import '../../mock_data/category_mock_data.dart';
-import '../../common/common_mock.dart';
+import '../../src/common/common_mock.dart';
 
 main() {
-  final mockResponse = json.decode(mockCategorysData);
+  final mockResponse = json.decode(mockCategoriesData);
+  final mockObserver = MockNavigatorObserver();
 
   setUpAll(() {
     registerFallbackValue(FakeCategoryState());
     registerFallbackValue(FakeCategoryEvent());
+    registerFallbackValue(RouteFake());
   });
 
   late CategoryService categoryService;
   late CategoryBloc categoryBloc;
   var widget = MaterialApp(
+    routes: buildRoutes(),
     home: MultiBlocProvider(
         providers: [BlocProvider(create: (context) => categoryBloc)],
         child: const CategoriesScreen()),
@@ -130,20 +135,17 @@ main() {
   });
 
   testWidgets(
-      'Should render red container with error message when crypto bloc state is [CryptoLoadFailure]',
+      'Should render LoadFailure widget when crypto bloc state is [CryptoLoadFailure]',
       (tester) async {
-    when(() => categoryBloc.state)
-        .thenReturn(CategoryLoadFailure(errorMessage: 'errorMessage'));
+    when(() => categoryBloc.state).thenReturn(CategoryLoadFailure());
     await tester.pumpWidget(widget);
     await tester.pump();
-    final errorMessageFinder = find.text('errorMessage');
-    expect(errorMessageFinder, findsOneWidget);
-    expect(
-        (tester.widget(find.byType(Container)) as Container).color, Colors.red);
+    final loadFailureFinder = find.byType(LoadFailure);
+    expect(loadFailureFinder, findsOneWidget);
   });
 
   testWidgets(
-      'Should render orange container with error message when not have any bloc state',
+      'Should render green container with error message when not have any bloc state',
       (tester) async {
     when(() => categoryBloc.state).thenReturn(CategoryInitial());
     await tester.pumpWidget(widget);
@@ -163,4 +165,34 @@ main() {
     final datatableFinder = find.byType(RefreshIndicator);
     expect(datatableFinder, findsOneWidget);
   });
+
+  testWidgets(
+      'Should reload when tap on TextButton when bloc state is [CategoryLoadFailure]',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryLoadFailure());
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(LoadFailure));
+    await tester.pump(const Duration(seconds: 1));
+    final coinCardFinder = find.descendant(
+        of: find.byType(Container), matching: find.byType(TextButton));
+    expect(coinCardFinder, findsOneWidget);
+    await tester.tap(coinCardFinder);
+    await tester.pumpAndSettle();
+    verifyNever(() => mockObserver.didPush(any(), any()));
+  });
+
+  testWidgets(
+      'Should refresh when drag when bloc state is [CategoryLoadFailure]',
+      (tester) async {
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+        categories: List<Category>.from(
+            mockResponse.map((model) => Category.fromJson(model)))));
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
+    await tester.drag(find.text('Category'), const Offset(0.0, 100.0));
+    await tester.pumpAndSettle();
+    verifyNever(() => mockObserver.didPush(any(), any()));
+  });
+
 }

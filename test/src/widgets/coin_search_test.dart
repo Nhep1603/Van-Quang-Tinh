@@ -14,8 +14,9 @@ import 'package:van_quang_tinh/src/models/crypto.dart';
 import 'package:van_quang_tinh/src/screens/search_screen.dart';
 import 'package:van_quang_tinh/src/services/crypto_currency/crypto_currency_service.dart';
 import 'package:van_quang_tinh/src/widgets/coin_search.dart';
+import 'package:van_quang_tinh/src/widgets/load_failure.dart';
 import '../../mock_data/crypto_mock_data.dart';
-import '../../common/common_mock.dart';
+import '../../src/common/common_mock.dart';
 
 main() {
   final mockResponse = json.decode(mockCryptoData);
@@ -148,16 +149,14 @@ main() {
     });
 
     testWidgets(
-        'Should render red container with error message when search bloc state is [SearchLoadFailure]',
+        'Should render LoadFailure widget when search bloc state is [SearchLoadFailure]',
         (tester) async {
       when(() => searchBloc.state)
-          .thenReturn(SearchLoadFailure(errorMessage: 'errorMessage'));
+          .thenReturn(SearchLoadFailure());
       await tester.pumpWidget(widget);
       await tester.pump();
-      final errorMessageFinder = find.text('errorMessage');
+      final errorMessageFinder = find.byType(LoadFailure);
       expect(errorMessageFinder, findsOneWidget);
-      expect((tester.widget(find.byType(Container)) as Container).color,
-          Colors.red);
     });
 
     testWidgets(
@@ -196,6 +195,21 @@ main() {
       await tester.pump(const Duration(seconds: 1));
       final coinCardFinder = find.descendant(
           of: find.byType(ListView), matching: find.byType(Card).first);
+      expect(coinCardFinder, findsOneWidget);
+      await tester.tap(coinCardFinder);
+      await tester.pumpAndSettle();
+      verifyNever(() => mockObserver.didPush(any(), any()));
+    });
+
+    testWidgets('Should reload when tap on TextButton when bloc state is [SearchLoadFailure]',
+        (tester) async {
+      when(() => searchBloc.state).thenReturn(SearchLoadFailure());
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(LoadFailure));
+      await tester.pump(const Duration(seconds: 1));
+      final coinCardFinder = find.descendant(
+          of: find.byType(Container), matching: find.byType(TextButton));
       expect(coinCardFinder, findsOneWidget);
       await tester.tap(coinCardFinder);
       await tester.pumpAndSettle();

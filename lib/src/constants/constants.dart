@@ -4,7 +4,8 @@ class HomeScreen {
   static const String cryptoCurrency = 'Cryptocurrency';
   static const String categories = 'Categories';
   static const String logoLink = "assets/images/coingecko_logo.png";
-  static const String aroundLogoLink = "assets/images/coingecko_around_logo.png";
+  static const String aroundLogoLink =
+      "assets/images/coingecko_around_logo.png";
 
   static const int searchButtonColor = 0xff4b4b4b;
 }
@@ -58,7 +59,7 @@ class CryptoDetailScreen {
   static const double emojiSmallImageHeight = 35.0;
   static const double priceChangePercentage24h = -0.5;
   static const double currentPrice = 62614;
-  
+
   static const String symbolImagePath = 'assets/images/bitcoin_symbol.jpg';
   static const String logoImagePath = 'assets/images/coingecko_logo.png';
   static const String sadEmojiImagePath = 'assets/images/sad_emoji.png';
@@ -88,13 +89,20 @@ class ColorConstants {
   ];
 }
 
-class SearchScreen{
+class SearchScreen {
   static const String title = 'Search';
   static const String hintText = 'Enter coins';
 }
 
-class StringConstant{
+class StringConstant {
   static const String textForMarketCapFieldEqualsZero = '-';
   static const String textForNullMarketCapField = '-';
   static const String textForNullNameField = 'N/A';
+}
+
+class LoadFailure {
+  static const String loadFailureText = 'Cannot access data';
+  static const String loadFailureTryAgainText = 'Try again';
+
+  static const double textButtonFontSize = 18.0;
 }
