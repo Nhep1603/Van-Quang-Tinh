@@ -14,7 +14,8 @@ import 'package:van_quang_tinh/src/config/routes.dart';
 import 'package:van_quang_tinh/src/models/crypto.dart';
 import 'package:van_quang_tinh/src/screens/crypto_currency_screen.dart';
 import 'package:van_quang_tinh/src/screens/crypto_detail_screen.dart';
-import 'package:van_quang_tinh/src/services/crypto_currency_service/crypto_currency_service.dart';
+import 'package:van_quang_tinh/src/services/crypto_currency/crypto_currency_service.dart';
+
 
 import '../../mock_data/crypto_currency_data.dart';
 

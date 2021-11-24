@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import './blocs/crypto_detail/crypto_detail_bloc.dart';
 import './blocs/crypto_currency/crypto_currency_bloc.dart';
+import './blocs/crypto_detail/crypto_detail_bloc.dart';
 import './config/routes.dart';
 import './screens/home_screen.dart';
-import './services/crypto_currency_service/crypto_currency_impl.dart';
+import './services/crypto_currency/crypto_currency_impl.dart';
+
 
 
 class App extends StatelessWidget {

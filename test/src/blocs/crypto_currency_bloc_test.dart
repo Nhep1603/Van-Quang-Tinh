@@ -7,14 +7,15 @@ import 'package:van_quang_tinh/src/blocs/crypto_currency/crypto_currency_bloc.da
 import 'package:van_quang_tinh/src/blocs/crypto_currency/crypto_currency_event.dart';
 import 'package:van_quang_tinh/src/blocs/crypto_currency/crypto_currency_state.dart';
 import 'package:van_quang_tinh/src/models/crypto.dart';
-import 'package:van_quang_tinh/src/services/crypto_currency_service/crypto_currency_service.dart';
+import 'package:van_quang_tinh/src/services/crypto_currency/crypto_currency_service.dart';
+
 
 import '../../mock_data/crypto_currency_data.dart';
 
 class MockCryptoService extends Mock implements CryptoCurrencyService {}
 
 main() {
-  
+
   final mockResponse = json.decode(mockCryptoCurrencyData);
   final cryptos = List<Crypto>.from(mockResponse.map((model) => Crypto.fromJson(model)));
   CryptoCurrencyService cryptoCurrencyService;
