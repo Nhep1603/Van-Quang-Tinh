@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:van_quang_tinh/src/config/app_config.dart';
-import 'package:van_quang_tinh/src/config/app_constants.dart';
-import 'package:van_quang_tinh/src/models/crypto.dart';
-import 'crypto_currency_service.dart';
+
+import '../../config/app_config.dart';
+import '../../config/app_constants.dart';
+import '../../models/crypto.dart';
+import './crypto_currency_service.dart';
 
 class CryptoCurrencyImpl extends CryptoCurrencyService {
   CryptoCurrencyImpl(http.Client client) : super(client);
