@@ -7,8 +7,8 @@ import '../../config/app_config.dart';
 import '../../config/app_constants.dart';
 import '../../models/category.dart';
 
-class AppCategoryService extends CategoryService {
-  AppCategoryService(http.Client client) : super(client);
+class ImplCategoryService extends CategoryService {
+  ImplCategoryService(http.Client client) : super(client);
   
   @override
   Future<List<Category>> fetchCategory() async {

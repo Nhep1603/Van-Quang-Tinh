@@ -12,7 +12,7 @@ class AppConstants {
   static const String cryptoPath = 'CRYPTO_PATH';
   static const String categoryPath = 'CATEGORY_PATH';
   static const String marketPath = 'MARKET_PATH';
-  static const String defaulEnv= 'production';
+  static const String defaultEnv= 'production';
   static const String envConfigPath = 'assets/config/env/';
   static const String envConfigType = '.json';
   static const String currencyOfMarket = 'usd';

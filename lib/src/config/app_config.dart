@@ -24,7 +24,7 @@ class AppConfig {
   Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
     const env = String.fromEnvironment(AppConstants.env,
-        defaultValue: AppConstants.defaulEnv);
+        defaultValue: AppConstants.defaultEnv);
     await setValue(env);
   }
 

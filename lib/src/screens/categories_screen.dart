@@ -75,16 +75,9 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                                 ))),
                             DataCell(Align(
                                 alignment: Alignment.centerLeft,
-                                child: model.name == null
-                                    ? const Text(
-                                        constants
-                                            .CategoriesScreen.checkNullNameText,
-                                        style: constants.CategoriesScreen
-                                            .columnNameTextStyle,
-                                      )
-                                    : Text(model.name!,
-                                        style: constants.CategoriesScreen
-                                            .columnNameTextStyle))),
+                                child: Text(model.name,
+                                    style: constants.CategoriesScreen
+                                        .columnNameTextStyle))),
                             DataCell(Align(
                               alignment: Alignment.center,
                               child: model.marketCapChange24h != 0
@@ -100,8 +93,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                                     )
                                   : const Center(
                                       child: Text(
-                                      constants
-                                          .CategoriesScreen.checkEqualZeroText,
+                                      constants.StringConstant
+                                          .textForMarketCapFieldEqualsZero,
                                       style: TextStyle(fontSize: 25),
                                     )),
                             )),
@@ -114,8 +107,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                                             .columnMarketCapTextStyle)
                                     : const Center(
                                         child: Text(
-                                        constants.CategoriesScreen
-                                            .checkEqualZeroText,
+                                        constants.StringConstant
+                                            .textForMarketCapFieldEqualsZero,
                                         style: TextStyle(fontSize: 25),
                                       )))),
                           ]))

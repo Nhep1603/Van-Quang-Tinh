@@ -8,7 +8,7 @@ import './blocs/search/search_bloc.dart';
 import './config/routes.dart';
 import './services/crypto_currency/crypto_currency_impl.dart';
 import './screens/home_screen.dart';
-import './services/category/app_category_service.dart';
+import 'services/category/impl_category_service.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
               create: (context) => CategoryBloc(
-                service: AppCategoryService(httpClient),
+                service: ImplCategoryService(httpClient),
               ),
             ),
             BlocProvider(
