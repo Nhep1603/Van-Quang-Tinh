@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/crypto_currency/bloc/crypto_currency_state.dart';
-import '../blocs/crypto_currency/bloc/crypto_currency_bloc.dart';
-import '../blocs/crypto_currency/bloc/crypto_currency_event.dart';
+import '../blocs/crypto_currency/crypto_currency_bloc.dart';
+import '../blocs/crypto_currency/crypto_currency_event.dart';
+import '../blocs/crypto_currency/crypto_currency_state.dart';
 import '../config/app_constants.dart';
 import '../constants/constants.dart' as constants;
 import '../utils/custom_number_format.dart';
