@@ -29,7 +29,7 @@ main() {
       expect: () => []);
 
   blocTest(
-    'emits [CryptoLoadInProgress] then [CryptoLoadSucess] when [CryptoRequested] is called',
+    'emits [CryptoCurrencyLoadInProgress] then [CryptoCurrencyLoadSucess] when [CryptoCurrencyRequested] is called',
     build: () {
       cryptoCurrencyService = MockCryptoService();
       return CryptoCurrencyBloc(service: cryptoCurrencyService);
@@ -42,7 +42,7 @@ main() {
   );
 
   blocTest(
-    'emits [CryptoLoadFailure] when [CryptoRequested] is called and service throws error.',
+    'emits [CryptoCurrencyLoadFailure] when [CryptoCurrencyRequested] is called and service throws error.',
     build: () {
       cryptoCurrencyService = MockCryptoService();
       when(cryptoCurrencyService.fetchCryptoCurrency(1)).thenThrow(Exception());

@@ -92,7 +92,7 @@ void main() {
   String errorMessage = 'errorMessage';
 
   testWidgets(
-      'Should render orange container when crypto bloc state is [CryptoInitial]',
+      'Should render orange container when crypto bloc state is [CryptoCurrencyInitial]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyInitial());
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
@@ -106,7 +106,7 @@ void main() {
   });
 
   testWidgets(
-      'Should render red container with error message when crypto bloc state is [CryptoLoadFailure]',
+      'Should render red container with error message when crypto bloc state is [CryptoCurrencyFailure]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state)
         .thenReturn(CryptoCurrencyLoadFailure(errorMessage: errorMessage));
@@ -121,7 +121,7 @@ void main() {
   });
 
   testWidgets(
-      'Should render a SingleChildScrollView when bloc state is [CryptoLoadSucess]',
+      'Should render a SingleChildScrollView when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
@@ -136,7 +136,7 @@ void main() {
   });
 
   testWidgets(
-      'Should render a RefreshIndicator when bloc state is [CryptoLoadSucess]',
+      'Should render a RefreshIndicator when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
@@ -168,7 +168,7 @@ void main() {
   //   expect(refreshCalled, false);
   // });
 
-  testWidgets('Should render Data Table when bloc state is [CryptoLoadSucess]',
+  testWidgets('Should render Data Table when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
@@ -184,7 +184,7 @@ void main() {
   });
 
   testWidgets(
-      'Should render Data Table have 5 columns when bloc state is [CryptoLoadSucess]',
+      'Should render Data Table have 5 columns when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
@@ -202,7 +202,7 @@ void main() {
   });
 
   testWidgets(
-      'Display correctly DataTable\'s column spacing when bloc state is [CryptoLoadSucess]',
+      'Display correctly DataTable\'s column spacing when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
@@ -218,7 +218,7 @@ void main() {
   });
 
   testWidgets(
-      'Display correctly DataTable\'s horizontal margin when bloc state is [CryptoLoadSucess]',
+      'Display correctly DataTable\'s horizontal margin when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
@@ -235,7 +235,7 @@ void main() {
   });
 
   testWidgets(
-      'Display correctly DataTable\'s data row height when bloc state is [CryptoLoadSucess]',
+      'Display correctly DataTable\'s data row height when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
@@ -251,7 +251,7 @@ void main() {
   });
 
   testWidgets(
-      'Display correctly DataTable\'s heading row height when bloc state is [CryptoLoadSucess]',
+      'Display correctly DataTable\'s heading row height when bloc state is [CryptoCurrencySucess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
@@ -268,7 +268,7 @@ void main() {
   });
 
   testWidgets(
-      'DataTable have the same number of rows as the number of data when bloc state is [CryptoLoadSucess]',
+      'DataTable have the same number of rows as the number of data when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
@@ -287,7 +287,7 @@ void main() {
   });
 
   testWidgets(
-      'Data Table should be tappable when bloc state is [CryptoLoadSucess]',
+      'Data Table should be tappable when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
@@ -308,7 +308,7 @@ void main() {
   });
 
   testWidgets(
-      'Should render center  with null list crypto currencies when crypto bloc state is [CryptoLoadSuccess]',
+      'Should render center  with null list crypto currencies when crypto bloc state is [CryptoCurrencyLoadSuccess]',
       (tester) async {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess());
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
