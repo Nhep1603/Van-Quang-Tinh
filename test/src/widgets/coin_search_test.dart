@@ -1,45 +1,19 @@
 import 'dart:convert';
 
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_bloc.dart';
-import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_event.dart';
-import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_state.dart';
 
+import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_bloc.dart';
 import 'package:van_quang_tinh/src/blocs/search/search_bloc.dart';
-import 'package:van_quang_tinh/src/blocs/search/search_event.dart';
 import 'package:van_quang_tinh/src/blocs/search/search_state.dart';
 import 'package:van_quang_tinh/src/config/routes.dart';
 import 'package:van_quang_tinh/src/models/crypto.dart';
 import 'package:van_quang_tinh/src/screens/search_screen.dart';
 import 'package:van_quang_tinh/src/services/crypto_currency/crypto_currency_service.dart';
 import '../../mock_data/crypto_mock_data.dart';
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
-
-class MyTypeFake extends Fake implements Route {}
-
-class MockSearchBloc extends MockBloc<SearchEvent, SearchState>
-    implements SearchBloc {}
-
-class MockSearchService extends Mock implements CryptoCurrencyService {}
-
-class FakeSearchState extends Fake implements SearchState {}
-
-class FakeSearchEvent extends Fake implements SearchEvent {}
-
-class RouteFake extends Fake implements Route {}
-
-class MockCryptoDetailBloc
-    extends MockBloc<CryptoDetailEvent, CryptoDetailState>
-    implements CryptoDetailBloc {}
-
-class FakeCryptoDetailState extends Fake implements CryptoDetailState {}
-
-class FakeCryptoDetailEvent extends Fake implements CryptoDetailEvent {}
+import '../../common/common_mock.dart';
 
 main() {
   final mockResponse = json.decode(mockCryptoData);
@@ -52,7 +26,6 @@ main() {
     registerFallbackValue(RouteFake());
   });
 
-  group('Category Screen Tests', () {
     late CryptoCurrencyService cryptoService;
     late SearchBloc searchBloc;
     late CryptoDetailBloc cryptoDetailBloc;
@@ -73,7 +46,7 @@ main() {
     });
 
     testWidgets(
-        'Should render 2 Container when bloc state is [SearchLoadSucess]',
+        'Should render two Container when bloc state is [SearchLoadSucess]',
         (tester) async {
       when(() => searchBloc.state).thenReturn(SearchLoadSucess(
           cryptos: List<Crypto>.from(
@@ -145,6 +118,4 @@ main() {
               .icon;
       expect(textFieldFinder, Icons.search);
     });
-    
-  });
 }
