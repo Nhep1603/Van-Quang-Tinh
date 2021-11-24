@@ -9,7 +9,7 @@ class CoinSearch extends StatelessWidget {
 
   final List<Crypto>? dataCrypto;
 
-  static String _displayStringForOption(Crypto option) => option.name!;
+  static String _displayStringForOption(Crypto option) => option.name;
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +70,12 @@ class CoinSearch extends StatelessWidget {
                     child: Card(
                       child: ListTile(
                         leading: Image.asset(
-                          option.image!,
+                          option.image,
                           errorBuilder: (context, error, strackTrace) =>
                               const Icon(Icons.error),
                         ),
                         title: Text(
-                          option.name!,
+                          option.name,
                           style: Theme.of(context).textTheme.headline6,
                         ),
                       ),

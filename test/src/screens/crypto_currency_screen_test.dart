@@ -283,16 +283,4 @@ void main() {
     expect(find.byType(CryptoDetailScreen), findsOneWidget);
   });
 
-  testWidgets(
-      'Should render center  with null list crypto currencies when crypto bloc state is [CryptoCurrencyLoadSuccess]',
-      (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess());
-    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
-    await tester.pumpWidget(widget);
-    await tester.pump();
-
-    final centerFinder = find.text('CryptoCurrency is NULL');
-
-    expect(centerFinder, findsOneWidget);
-  });
 }

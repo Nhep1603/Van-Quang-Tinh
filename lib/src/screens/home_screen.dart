@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../constants/constants.dart' as constants;
-import '../models/data.dart';
 import '../screens/categories_screen.dart' as category;
 import '../screens/crypto_currency_screen.dart' as crypto;
 import '../screens/search_screen.dart';
@@ -40,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SearchScreen(dataCrypto: dataCrypto,)),
+                    MaterialPageRoute(builder: (context) =>const SearchScreen()),
                   );
                 },
               ),

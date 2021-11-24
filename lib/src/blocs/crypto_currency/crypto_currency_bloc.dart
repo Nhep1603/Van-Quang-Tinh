@@ -13,9 +13,9 @@ class CryptoCurrencyBloc
   CryptoCurrencyBloc({required this.service}) : super(CryptoCurrencyInitial()) {
     on<CryptoCurrencyRequested>((event, emit) async {
       emit(CryptoCurrencyLoadInProgress());
-      try { 
+      try {
         final cryptos = await service.fetchCryptoCurrency(page);
-        emit(CryptoCurrencyLoadSucess(cryptos: cryptos));
+        emit(CryptoCurrencyLoadSucess(cryptos: cryptos!));
       } catch (e) {
         emit(CryptoCurrencyLoadFailure(errorMessage: e.toString()));
       }
