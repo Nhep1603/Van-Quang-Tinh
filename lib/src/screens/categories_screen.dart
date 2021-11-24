@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:van_quang_tinh/src/widgets/load_failure.dart';
 
 import '../blocs/category/category_bloc.dart';
 import '../blocs/category/category_event.dart';
@@ -116,11 +117,9 @@ class _CategoriesScreenState extends State<CategoriesScreen>
             ),
           );
         } else if (state is CategoryLoadFailure) {
-          return Container(
-            color: Colors.red,
-            alignment: Alignment.center,
-            child: Text(state.errorMessage!),
-          );
+          return LoadFailure(reload: () {
+            context.read<CategoryBloc>().add(CategoryRequested());
+          });
         }
         return Container(
           color: Colors.green,
