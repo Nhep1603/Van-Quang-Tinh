@@ -90,6 +90,8 @@ void main() {
   double dataRowHeight = 55;
   double headingRowHeight = 50;
   String errorMessage = 'errorMessage';
+  final cryptos =
+      List<Crypto>.from(mockResponse.map((model) => Crypto.fromJson(model)));
 
   testWidgets(
       'Should render orange container when crypto bloc state is [CryptoCurrencyInitial]',
@@ -110,7 +112,7 @@ void main() {
       (tester) async {
     when(() => cryptoCurrencyBloc.state)
         .thenReturn(CryptoCurrencyLoadFailure(errorMessage: errorMessage));
-        when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pump();
 
@@ -126,7 +128,7 @@ void main() {
     when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
         cryptos: List<Crypto>.from(
             mockResponse.map((model) => Crypto.fromJson(model)))));
-            when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
 
@@ -138,10 +140,9 @@ void main() {
   testWidgets(
       'Should render a RefreshIndicator when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
-        cryptos: List<Crypto>.from(
-            mockResponse.map((model) => Crypto.fromJson(model)))));
-            when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+    when(() => cryptoCurrencyBloc.state)
+        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
 
@@ -150,31 +151,13 @@ void main() {
     expect(refreshIndicatorFinder, findsOneWidget);
   });
 
-  // testWidgets('Should refresh coin list  when scroll down the coin list',
-  //     (tester) async {
-  //   bool refreshCalled = false;
-  //   when(() => cryptoCurrencyBloc.state).thenReturn(CryptoLoadSucess(
-  //     cryptos: List<Crypto>.from(
-  //         mockResponse.map((model) => Crypto.fromJson(model))),
-  //   ));
-  //   await tester.pumpWidget(widget);
-  //   await tester.pumpAndSettle();
-  //   final dataTableFinder = find.byType(DataTable);
-  //   await tester.fling(dataTableFinder, const Offset(0.0, 100.0), 1000.0);
-  //   await tester.pump();
-  //   await tester.pump(const Duration(seconds: 1));
-  //   await tester.pump(const Duration(seconds: 1));
-  //   await tester.pump(const Duration(seconds: 1));
-  //   expect(refreshCalled, false);
-  // });
-
-  testWidgets('Should render Data Table when bloc state is [CryptoCurrencyLoadSucess]',
+  testWidgets(
+      'Should render Data Table when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
-        cryptos: List<Crypto>.from(
-            mockResponse.map((model) => Crypto.fromJson(model)))));
+    when(() => cryptoCurrencyBloc.state)
+        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
 
-            when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
 
@@ -186,10 +169,9 @@ void main() {
   testWidgets(
       'Should render Data Table have 5 columns when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
-        cryptos: List<Crypto>.from(
-            mockResponse.map((model) => Crypto.fromJson(model)))));
-            when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+    when(() => cryptoCurrencyBloc.state)
+        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
 
@@ -204,10 +186,9 @@ void main() {
   testWidgets(
       'Display correctly DataTable\'s column spacing when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
-        cryptos: List<Crypto>.from(
-            mockResponse.map((model) => Crypto.fromJson(model)))));
-            when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+    when(() => cryptoCurrencyBloc.state)
+        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
 
@@ -220,10 +201,9 @@ void main() {
   testWidgets(
       'Display correctly DataTable\'s horizontal margin when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
-        cryptos: List<Crypto>.from(
-            mockResponse.map((model) => Crypto.fromJson(model)))));
-            when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+    when(() => cryptoCurrencyBloc.state)
+        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
 
@@ -237,10 +217,9 @@ void main() {
   testWidgets(
       'Display correctly DataTable\'s data row height when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
-        cryptos: List<Crypto>.from(
-            mockResponse.map((model) => Crypto.fromJson(model)))));
-            when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+    when(() => cryptoCurrencyBloc.state)
+        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
 
@@ -253,10 +232,9 @@ void main() {
   testWidgets(
       'Display correctly DataTable\'s heading row height when bloc state is [CryptoCurrencySucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
-        cryptos: List<Crypto>.from(
-            mockResponse.map((model) => Crypto.fromJson(model)))));
-            when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+    when(() => cryptoCurrencyBloc.state)
+        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
 
@@ -270,10 +248,9 @@ void main() {
   testWidgets(
       'DataTable have the same number of rows as the number of data when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
-        cryptos: List<Crypto>.from(
-            mockResponse.map((model) => Crypto.fromJson(model)))));
-            when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
+    when(() => cryptoCurrencyBloc.state)
+        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
 
@@ -289,9 +266,8 @@ void main() {
   testWidgets(
       'Data Table should be tappable when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
-        cryptos: List<Crypto>.from(
-            mockResponse.map((model) => Crypto.fromJson(model)))));
+    when(() => cryptoCurrencyBloc.state)
+        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
