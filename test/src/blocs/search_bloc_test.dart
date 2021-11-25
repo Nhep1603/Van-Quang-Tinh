@@ -2,15 +2,12 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:van_quang_tinh/src/blocs/category/category_event.dart';
 import 'package:van_quang_tinh/src/blocs/search/search_bloc.dart';
 import 'package:van_quang_tinh/src/blocs/search/search_event.dart';
 import 'package:van_quang_tinh/src/blocs/search/search_state.dart';
 import 'package:van_quang_tinh/src/services/crypto_currency/crypto_currency_service.dart';
 
 class MockSearchService extends Mock implements CryptoCurrencyService {}
-
-class MockCategoryEvent extends CategoryEvent {}
 
 main() {
   CryptoCurrencyService cryptoService;

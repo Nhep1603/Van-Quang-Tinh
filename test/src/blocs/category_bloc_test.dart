@@ -7,10 +7,7 @@ import 'package:van_quang_tinh/src/blocs/category/category_event.dart';
 import 'package:van_quang_tinh/src/blocs/category/category_state.dart';
 import 'package:van_quang_tinh/src/services/category/category_service.dart';
 
-
 class MockCategoryService extends Mock implements CategoryService {}
-
-class MockCategoryEvent extends CategoryEvent {}
 
 main() {
   CategoryService categoryService;
