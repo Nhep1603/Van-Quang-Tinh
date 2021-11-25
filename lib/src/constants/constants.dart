@@ -32,6 +32,13 @@ class CategoriesScreen {
       color: Colors.black, fontWeight: FontWeight.w600, fontSize: 14.2);
   static const TextStyle columnMarketCapTextStyle =
       TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 15);
+
+  static const categoriesHeadingColumns = [
+    columnNumber,
+    columnCategory,
+    columnTime,
+    columnMarketCap
+  ];
 }
 
 class CryptoCurrencyScreen {

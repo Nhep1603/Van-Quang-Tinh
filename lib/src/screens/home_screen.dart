@@ -37,8 +37,7 @@ class HomeScreen extends StatelessWidget {
                 color: const Color(constants.HomeScreen.searchButtonColor),
                 icon: const Icon(Icons.search),
                 onPressed: () {
-                  Navigator.pushNamed(
-                    context, RouteNames.searchScreen);
+                  Navigator.pushNamed(context, RouteNames.searchScreen);
                 },
               ),
             ],

@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 
 import '../../models/crypto.dart';
 
-
 abstract class SearchState extends Equatable {
   @override
   List<Object?> get props => [];
@@ -21,9 +20,9 @@ class SearchLoadFailure extends SearchState {
 
 class SearchLoadInProgress extends SearchState {}
 
-class SearchLoadSucess extends SearchState {
+class SearchLoadSuccess extends SearchState {
   final List<Crypto>? cryptos;
-  SearchLoadSucess({this.cryptos});
+  SearchLoadSuccess({this.cryptos});
 
   @override
   List<Object?> get props => [cryptos];

@@ -6,7 +6,7 @@ import './blocs/crypto_detail/crypto_detail_bloc.dart';
 import './blocs/category/category_bloc.dart';
 import './blocs/search/search_bloc.dart';
 import './config/routes.dart';
-import './services/category/impl_category_service.dart';
+import './services/category/category_impl.dart';
 import './services/crypto_currency/crypto_currency_impl.dart';
 import './screens/home_screen.dart';
 
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
               create: (context) => CategoryBloc(
-                service: ImplCategoryService(httpClient),
+                service: CategoryImpl(httpClient),
               ),
             ),
             BlocProvider(

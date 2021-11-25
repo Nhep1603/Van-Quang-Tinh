@@ -37,7 +37,7 @@ main() {
     act: (SearchBloc bloc) => bloc.add(SearchRequested()),
     expect: () => [
       SearchLoadInProgress(),
-      SearchLoadSucess(),
+      SearchLoadSuccess(),
     ],
   );
 

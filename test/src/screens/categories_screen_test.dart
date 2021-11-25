@@ -46,7 +46,7 @@ main() {
   testWidgets(
       'Should render a SingleChildScrollView when bloc state is [CryptoLoadSucess]',
       (tester) async {
-    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSuccess(
         categories: List<Category>.from(
             mockResponse.map((model) => Category.fromJson(model)))));
     await tester.pumpWidget(widget);
@@ -57,7 +57,7 @@ main() {
 
   testWidgets('Should render a DataTable when bloc state is [CryptoLoadSucess]',
       (tester) async {
-    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSuccess(
         categories: List<Category>.from(
             mockResponse.map((model) => Category.fromJson(model)))));
     await tester.pumpWidget(widget);
@@ -69,7 +69,7 @@ main() {
   testWidgets(
       'Display correctly DataTable\'s column spacing when bloc state is [CryptoLoadSucess]',
       (tester) async {
-    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSuccess(
         categories: List<Category>.from(
             mockResponse.map((model) => Category.fromJson(model)))));
     await tester.pumpWidget(widget);
@@ -82,7 +82,7 @@ main() {
   testWidgets(
       'Display correctly DataTable\'s horizontal margin when bloc state is [CryptoLoadSucess]',
       (tester) async {
-    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSuccess(
         categories: List<Category>.from(
             mockResponse.map((model) => Category.fromJson(model)))));
     await tester.pumpWidget(widget);
@@ -96,7 +96,7 @@ main() {
   testWidgets(
       'Display correctly DataTable\'s data row height when bloc state is [CryptoLoadSucess]',
       (tester) async {
-    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSuccess(
         categories: List<Category>.from(
             mockResponse.map((model) => Category.fromJson(model)))));
     await tester.pumpWidget(widget);
@@ -109,7 +109,7 @@ main() {
   testWidgets(
       'Display correctly DataTable\'s heading row height when bloc state is [CryptoLoadSucess]',
       (tester) async {
-    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSuccess(
         categories: List<Category>.from(
             mockResponse.map((model) => Category.fromJson(model)))));
     await tester.pumpWidget(widget);
@@ -122,7 +122,7 @@ main() {
 
   testWidgets('DataTable have 4 columns when bloc state is [CryptoLoadSucess]',
       (tester) async {
-    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSuccess(
         categories: List<Category>.from(
             mockResponse.map((model) => Category.fromJson(model)))));
     await tester.pumpWidget(widget);
@@ -157,7 +157,7 @@ main() {
   testWidgets(
       'Should have RefreshIndicator when bloc state is [CryptoLoadSucess]',
       (tester) async {
-    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSuccess(
         categories: List<Category>.from(
             mockResponse.map((model) => Category.fromJson(model)))));
     await tester.pumpWidget(widget);
@@ -185,7 +185,7 @@ main() {
   testWidgets(
       'Should refresh when drag when bloc state is [CategoryLoadFailure]',
       (tester) async {
-    when(() => categoryBloc.state).thenReturn(CategoryLoadSucess(
+    when(() => categoryBloc.state).thenReturn(CategoryLoadSuccess(
         categories: List<Category>.from(
             mockResponse.map((model) => Category.fromJson(model)))));
     await tester.pumpWidget(widget);

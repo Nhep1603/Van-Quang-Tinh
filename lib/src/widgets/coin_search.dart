@@ -28,7 +28,7 @@ class CoinSearch extends StatelessWidget {
           return LoadFailure(reload: () {
             context.read<SearchBloc>().add(SearchRequested());
           });
-        } else if (state is SearchLoadSucess) {
+        } else if (state is SearchLoadSuccess) {
           return Container(
             margin: EdgeInsets.symmetric(horizontal: containerMargin),
             decoration: const BoxDecoration(

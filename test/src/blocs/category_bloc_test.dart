@@ -37,7 +37,7 @@ main() {
     act: (CategoryBloc bloc) => bloc.add(CategoryRequested()),
     expect: () => [
       CategoryLoadInProgress(),
-      CategoryLoadSucess(),
+      CategoryLoadSuccess(),
     ],
   );
 

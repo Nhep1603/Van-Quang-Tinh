@@ -50,9 +50,9 @@ main() {
     });
 
     testWidgets(
-        'Should render two Container when bloc state is [SearchLoadSucess]',
+        'Should render 2 Container when bloc state is [SearchLoadSucess]',
         (tester) async {
-      when(() => searchBloc.state).thenReturn(SearchLoadSucess(
+      when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
           cryptos: List<Crypto>.from(
               mockResponse.map((model) => Crypto.fromJson(model)))));
       await tester.pumpWidget(widget);
@@ -64,7 +64,7 @@ main() {
     testWidgets(
         'Should render correctly Container\'s color when bloc state is [SearchLoadSucess]',
         (tester) async {
-      when(() => searchBloc.state).thenReturn(SearchLoadSucess(
+      when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
           cryptos: List<Crypto>.from(
               mockResponse.map((model) => Crypto.fromJson(model)))));
       await tester.pumpWidget(widget);
@@ -80,7 +80,7 @@ main() {
     testWidgets(
         'Display correctly TextField\'s hintText when bloc state is [SearchLoadSucess]',
         (tester) async {
-      when(() => searchBloc.state).thenReturn(SearchLoadSucess(
+      when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
           cryptos: List<Crypto>.from(
               mockResponse.map((model) => Crypto.fromJson(model)))));
       await tester.pumpWidget(widget);
@@ -95,7 +95,7 @@ main() {
     testWidgets(
         'Display correctly TextField\'s border when bloc state is [SearchLoadSucess]',
         (tester) async {
-      when(() => searchBloc.state).thenReturn(SearchLoadSucess(
+      when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
           cryptos: List<Crypto>.from(
               mockResponse.map((model) => Crypto.fromJson(model)))));
       await tester.pumpWidget(widget);
@@ -110,7 +110,7 @@ main() {
     testWidgets(
         'Display correctly TextField\'s prefixIcon when bloc state is [SearchLoadSucess]',
         (tester) async {
-      when(() => searchBloc.state).thenReturn(SearchLoadSucess(
+      when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
           cryptos: List<Crypto>.from(
               mockResponse.map((model) => Crypto.fromJson(model)))));
       await tester.pumpWidget(widget);
@@ -126,7 +126,7 @@ main() {
         testWidgets(
         'Should render Category\'s data in TextField when bloc state is [SearchLoadSucess]',
         (tester) async {
-      when(() => searchBloc.state).thenReturn(SearchLoadSucess(
+      when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
           cryptos: List<Crypto>.from(
               mockResponse.map((model) => Crypto.fromJson(model)))));
       await tester.pumpWidget(widget);
@@ -138,7 +138,7 @@ main() {
     testWidgets(
         'Display AutoComplete widget when bloc state is [SearchLoadSucess]',
         (tester) async {
-      when(() => searchBloc.state).thenReturn(SearchLoadSucess(
+      when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
           cryptos: List<Crypto>.from(
               mockResponse.map((model) => Crypto.fromJson(model)))));
       await tester.pumpWidget(widget);
@@ -172,7 +172,7 @@ main() {
     testWidgets(
         'Should render Search bar when bloc state is [SearchLoadSuccess]',
         (tester) async {
-      when(() => searchBloc.state).thenReturn(SearchLoadSucess(
+      when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
         cryptos: List<Crypto>.from(
             mockResponse.map((model) => Crypto.fromJson(model))).toList(),
       ));
@@ -184,7 +184,7 @@ main() {
     testWidgets('Should search Coin when bloc state is [SearchLoadSuccess]',
         (tester) async {
       when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
-      when(() => searchBloc.state).thenReturn(SearchLoadSucess(
+      when(() => searchBloc.state).thenReturn(SearchLoadSuccess(
         cryptos: List<Crypto>.from(
             mockResponse.map((model) => Crypto.fromJson(model))).toList(),
       ));

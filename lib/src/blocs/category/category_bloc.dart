@@ -11,7 +11,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<CategoryRequested>((event, emit) async {
       try {
         emit(CategoryLoadInProgress());
-        emit(CategoryLoadSucess(categories: await service!.fetchCategory()));
+        emit(CategoryLoadSuccess(categories: await service!.fetchCategory()));
       } catch (e) {
         emit(CategoryLoadFailure(errorMessage: e.toString()));
       }

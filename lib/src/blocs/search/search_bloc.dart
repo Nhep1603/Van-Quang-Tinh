@@ -11,7 +11,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<SearchRequested>((event, emit) async {
       try {
         emit(SearchLoadInProgress());
-        emit(SearchLoadSucess(cryptos: await service!.fetchAllCryptoCurrency()));
+        emit(SearchLoadSuccess(
+            cryptos: await service!.fetchAllCryptoCurrency()));
       } catch (e) {
         emit(SearchLoadFailure(errorMessage: e.toString()));
       }

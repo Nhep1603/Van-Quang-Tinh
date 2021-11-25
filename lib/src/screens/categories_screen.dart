@@ -6,6 +6,7 @@ import '../blocs/category/category_event.dart';
 import '../blocs/category/category_state.dart';
 import '../constants/constants.dart' as constants;
 import '../utils/custom_number_format.dart';
+import '../widgets/heading_row.dart';
 import '../widgets/load_failure.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -17,7 +18,6 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen>
     with AutomaticKeepAliveClientMixin {
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -27,7 +27,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       builder: (context, state) {
         if (state is CategoryLoadInProgress) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is CategoryLoadSucess) {
+        } else if (state is CategoryLoadSuccess) {
           return RefreshIndicator(
             onRefresh: () async {
               serialNumber = 0;
@@ -44,28 +44,12 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                       constants.CategoriesScreen.dataRowColor),
                   dataRowHeight: constants.CategoriesScreen.dataRowHeight,
                   headingRowHeight: constants.CategoriesScreen.headingRowHeight,
-                  columns: const [
-                    DataColumn(
-                        label: Expanded(
-                            child: Center(
-                      child: Text(constants.CategoriesScreen.columnNumber),
-                    ))),
-                    DataColumn(
-                        label: Expanded(
-                            child: Center(
-                      child: Text(constants.CategoriesScreen.columnCategory),
-                    ))),
-                    DataColumn(
-                        label: Expanded(
-                            child: Center(
-                      child: Text(constants.CategoriesScreen.columnTime),
-                    ))),
-                    DataColumn(
-                        label: Expanded(
-                            child: Center(
-                      child: Text(constants.CategoriesScreen.columnMarketCap),
-                    ))),
-                  ],
+                  columns: constants.CategoriesScreen.categoriesHeadingColumns
+                      .map((column) => DataColumn(
+                              label: HeadingRow(
+                            title: column,
+                          )))
+                      .toList(),
                   rows: state.categories!
                       .map((model) => DataRow(cells: [
                             DataCell(Align(
