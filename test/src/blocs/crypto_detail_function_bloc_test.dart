@@ -8,7 +8,6 @@ import 'package:van_quang_tinh/src/blocs/crypto_detail_function/crypto_detail_fu
 import 'package:van_quang_tinh/src/enum/line_chart_enum.dart';
 import 'package:van_quang_tinh/src/models/crypto_detail.dart';
 import 'package:van_quang_tinh/src/models/prices.dart';
-
 import '../../mock_data/line_chart_data.dart';
 
 class MockCryptoDetailFunctionEvent extends CryptoDetailFunctionEvent {}
