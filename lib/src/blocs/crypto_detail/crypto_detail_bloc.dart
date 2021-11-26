@@ -26,9 +26,9 @@ class CryptoDetailBloc extends Bloc<CryptoDetailEvent, CryptoDetailState> {
     try {
       emit(CryptoDetailLoadInProgress());
       _cryptoDetail =
-          await cryptoDetailService.fetchCryptoDetail(event.cryptoId)!;
-      _prices24H = await pricesService.fetchPrices(event.cryptoId, 1)!;
-      _prices7D = await pricesService.fetchPrices(event.cryptoId, 7)!;
+          (await cryptoDetailService.fetchCryptoDetail(event.cryptoId))!;
+      _prices24H = (await pricesService.fetchPrices(event.cryptoId, 1))!;
+      _prices7D = (await pricesService.fetchPrices(event.cryptoId, 7))!;
 
       emit(CryptoDetailLoadSuccess(
         cryptoDetail: _cryptoDetail,

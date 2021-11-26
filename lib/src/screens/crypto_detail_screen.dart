@@ -16,7 +16,7 @@ import '../widgets/custom_crypto_price_line_chart.dart';
 
 class CryptoDetailScreen extends StatefulWidget {
   final String cryptoId;
-  
+
   const CryptoDetailScreen(this.cryptoId, {Key? key}) : super(key: key);
 
   @override
@@ -96,9 +96,13 @@ class _CryptoDetailScreenState extends State<CryptoDetailScreen> {
               ),
             ),
             body: RefreshIndicator(
-              onRefresh: () async => context
-                  .read<CryptoDetailBloc>()
-                  .add(CryptoDetailStarted(cryptoId: widget.cryptoId)),
+              onRefresh: () async {
+                usdTextFieldController.text = '';
+                cryptoTextFieldController.text = '';
+                context
+                    .read<CryptoDetailBloc>()
+                    .add(CryptoDetailStarted(cryptoId: widget.cryptoId));
+              },
               child: SingleChildScrollView(
                 child: Column(
                   children: [
