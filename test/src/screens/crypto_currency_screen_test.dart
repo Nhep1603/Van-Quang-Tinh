@@ -1,48 +1,26 @@
 import 'dart:convert';
-import 'package:bloc_test/bloc_test.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
+
 import 'package:van_quang_tinh/src/blocs/crypto_currency/crypto_currency_bloc.dart';
-import 'package:van_quang_tinh/src/blocs/crypto_currency/crypto_currency_event.dart';
 import 'package:van_quang_tinh/src/blocs/crypto_currency/crypto_currency_state.dart';
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_bloc.dart';
-import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_event.dart';
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_state.dart';
 import 'package:van_quang_tinh/src/config/routes.dart';
 import 'package:van_quang_tinh/src/models/crypto.dart';
 import 'package:van_quang_tinh/src/screens/crypto_currency_screen.dart';
 import 'package:van_quang_tinh/src/screens/crypto_detail_screen.dart';
 import 'package:van_quang_tinh/src/services/crypto_currency/crypto_currency_service.dart';
-
-
 import '../../mock_data/crypto_currency_data.dart';
-
-class MockCryptoCurrencyBloc
-    extends MockBloc<CryptoCurrencyEvent, CryptoCurrencyState>
-    implements CryptoCurrencyBloc {}
-
-class MockCryptoDetailBloc
-    extends MockBloc<CryptoDetailEvent, CryptoDetailState>
-    implements CryptoDetailBloc {}
-
-class FakeCryptoDetailState extends Fake implements CryptoDetailState {}
-
-class FakeCryptoDetailEvent extends Fake implements CryptoDetailEvent {}
-
-class MockCryptoCurrencyService extends Mock implements CryptoCurrencyService {}
-
-class FakeCryptoCurrencyState extends Fake implements CryptoCurrencyState {}
-
-class FakeCryptoCurrencyEvent extends Fake implements CryptoCurrencyEvent {}
+import '../common/common_mock.dart';
 
 class CustomBindings extends AutomatedTestWidgetsFlutterBinding {
   @override
   bool get overrideHttpClient => false;
 }
-
-class RouteFake extends Fake implements Route {}
 
 void main() {
   CustomBindings();
@@ -91,7 +69,7 @@ void main() {
   double dataRowHeight = 55;
   double headingRowHeight = 50;
   String errorMessage = 'errorMessage';
-  final cryptos =
+  final _cryptos =
       List<Crypto>.from(mockResponse.map((model) => Crypto.fromJson(model)));
 
   testWidgets(
@@ -126,12 +104,11 @@ void main() {
   testWidgets(
       'Should render a SingleChildScrollView when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state).thenReturn(CryptoCurrencyLoadSucess(
-        cryptos: List<Crypto>.from(
-            mockResponse.map((model) => Crypto.fromJson(model)))));
+    when(() => cryptoCurrencyBloc.state).thenReturn(
+        CryptoCurrencyLoadSuccess(cryptos: _cryptos, isLoading: true));
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     final singleChildScrollViewFinder = find.byType(SingleChildScrollView);
 
@@ -141,11 +118,11 @@ void main() {
   testWidgets(
       'Should render a RefreshIndicator when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state)
-        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoCurrencyBloc.state).thenReturn(
+        CryptoCurrencyLoadSuccess(cryptos: _cryptos, isLoading: true));
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     final refreshIndicatorFinder = find.byType(RefreshIndicator);
 
@@ -155,12 +132,12 @@ void main() {
   testWidgets(
       'Should render Data Table when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state)
-        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoCurrencyBloc.state).thenReturn(
+        CryptoCurrencyLoadSuccess(cryptos: _cryptos, isLoading: true));
 
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     final dataTabledFinder = find.byType(DataTable);
 
@@ -170,11 +147,11 @@ void main() {
   testWidgets(
       'Should render Data Table have 5 columns when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state)
-        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoCurrencyBloc.state).thenReturn(
+        CryptoCurrencyLoadSuccess(cryptos: _cryptos, isLoading: true));
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     final columnsFinder =
         (tester.firstWidget(find.byType(DataTable)) as DataTable)
@@ -187,11 +164,11 @@ void main() {
   testWidgets(
       'Display correctly DataTable\'s column spacing when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state)
-        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoCurrencyBloc.state).thenReturn(
+        CryptoCurrencyLoadSuccess(cryptos: _cryptos, isLoading: true));
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     final columnSpacingFinder =
         (tester.firstWidget(find.byType(DataTable)) as DataTable).columnSpacing;
@@ -202,11 +179,11 @@ void main() {
   testWidgets(
       'Display correctly DataTable\'s horizontal margin when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state)
-        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoCurrencyBloc.state).thenReturn(
+        CryptoCurrencyLoadSuccess(cryptos: _cryptos, isLoading: true));
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     final horizontalMarginFinder =
         (tester.firstWidget(find.byType(DataTable)) as DataTable)
@@ -218,11 +195,11 @@ void main() {
   testWidgets(
       'Display correctly DataTable\'s data row height when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state)
-        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoCurrencyBloc.state).thenReturn(
+        CryptoCurrencyLoadSuccess(cryptos: _cryptos, isLoading: true));
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     final dataRowHeightFinder =
         (tester.firstWidget(find.byType(DataTable)) as DataTable).dataRowHeight;
@@ -233,11 +210,11 @@ void main() {
   testWidgets(
       'Display correctly DataTable\'s heading row height when bloc state is [CryptoCurrencySucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state)
-        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoCurrencyBloc.state).thenReturn(
+        CryptoCurrencyLoadSuccess(cryptos: _cryptos, isLoading: true));
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     final headingRowHeightFinder =
         (tester.firstWidget(find.byType(DataTable)) as DataTable)
@@ -249,11 +226,11 @@ void main() {
   testWidgets(
       'DataTable have the same number of rows as the number of data when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state)
-        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoCurrencyBloc.state).thenReturn(
+        CryptoCurrencyLoadSuccess(cryptos: _cryptos, isLoading: true));
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     final headingRowHeightFinder =
         (tester.firstWidget(find.byType(DataTable)) as DataTable).rows.length;
@@ -267,11 +244,10 @@ void main() {
   testWidgets(
       'Data Table should be tappable when bloc state is [CryptoCurrencyLoadSucess]',
       (tester) async {
-    when(() => cryptoCurrencyBloc.state)
-        .thenReturn(CryptoCurrencyLoadSucess(cryptos: cryptos));
+    when(() => cryptoCurrencyBloc.state).thenReturn(
+        CryptoCurrencyLoadSuccess(cryptos: _cryptos, isLoading: true));
     when(() => cryptoDetailBloc.state).thenReturn(CryptoDetailInitial());
     await tester.pumpWidget(widget);
-    await tester.pumpAndSettle();
 
     final iconButtonFinder = find.byType(DataTable);
 
@@ -283,5 +259,4 @@ void main() {
 
     expect(find.byType(CryptoDetailScreen), findsOneWidget);
   });
-
 }

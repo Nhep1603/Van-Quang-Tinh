@@ -5,4 +5,12 @@ abstract class CryptoCurrencyEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CryptoCurrencyRequested extends CryptoCurrencyEvent {}
+class CryptoCurrencyRequested extends CryptoCurrencyEvent {
+  final bool isRefesh;
+  CryptoCurrencyRequested({required this.isRefesh});
+
+  @override
+  List<Object> get props => [isRefesh];
+}
+
+class CryptoCurrencyLoadMore extends CryptoCurrencyEvent {}

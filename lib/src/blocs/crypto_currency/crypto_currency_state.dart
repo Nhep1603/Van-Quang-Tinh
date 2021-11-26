@@ -19,11 +19,12 @@ class CryptoCurrencyLoadFailure extends CryptoCurrencyState {
   List<Object?> get props => [errorMessage];
 }
 
-class CryptoCurrencyLoadSucess extends CryptoCurrencyState {
+class CryptoCurrencyLoadSuccess extends CryptoCurrencyState {
   final List<Crypto> cryptos;
+  final bool isLoading;
 
-  CryptoCurrencyLoadSucess({required this.cryptos});
+  CryptoCurrencyLoadSuccess({required this.cryptos,required this.isLoading});
 
   @override
-  List<Object?> get props => [cryptos];
+  List<Object?> get props => [cryptos,isLoading];
 }

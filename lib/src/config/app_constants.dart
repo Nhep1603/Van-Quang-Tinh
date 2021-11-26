@@ -21,5 +21,5 @@ class AppConstants {
   static const String orderBy = 'market_cap_desc';
 
   static const String currencyOfMarket = 'usd';
-  static const String limit = '100';
+  static const String limit = '50';
 }
