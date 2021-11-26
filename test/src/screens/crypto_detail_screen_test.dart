@@ -21,7 +21,6 @@ import 'package:van_quang_tinh/src/services/prices/prices_service.dart';
 import 'package:van_quang_tinh/src/utils/custom_number_format.dart';
 import 'package:van_quang_tinh/src/widgets/currency_conversion_text_field.dart';
 import 'package:van_quang_tinh/src/widgets/custom_crypto_price_line_chart.dart';
-
 import '../../mock_data/crypto_detail_data.dart';
 import '../../mock_data/line_chart_data.dart';
 import '../common/mock_network.dart';

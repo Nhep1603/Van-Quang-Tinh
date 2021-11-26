@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_bloc.dart';
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_event.dart';
 import 'package:van_quang_tinh/src/blocs/crypto_detail/crypto_detail_state.dart';
