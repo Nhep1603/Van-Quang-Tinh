@@ -79,7 +79,7 @@ class CryptoMarketData {
 }
 
 class CryptoCurrentPrice {
-  final int usdPrice;
+  final num usdPrice;
 
   const CryptoCurrentPrice({
     required this.usdPrice,

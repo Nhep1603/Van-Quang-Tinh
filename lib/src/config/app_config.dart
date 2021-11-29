@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import './app_constants.dart';
@@ -34,4 +34,3 @@ class AppConfig {
     _config = json.decode(configString);
   }
 }
- 

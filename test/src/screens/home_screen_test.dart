@@ -15,9 +15,9 @@ void main() {
   const labelStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 16);
   final _tabs = ['Cryptocurrency', 'Categories'];
 
-  var widget = MaterialApp(
-    routes: buildRoutes(),
-    home: const App(),
+  var widget = const MaterialApp(
+    onGenerateRoute: Routes.onGenerateRoute,
+    home: App(),
   );
 
   group('Tab bar Widget Testing', () {
@@ -220,7 +220,7 @@ void main() {
       await tester.pumpWidget(BlocProvider(
         create: (context) => SearchBloc(),
         child: MaterialApp(
-          routes: buildRoutes(),
+          onGenerateRoute: Routes.onGenerateRoute,
           home: const HomeScreen(),
           navigatorObservers: [mockObserver],
         ),

@@ -10,9 +10,9 @@ import 'package:van_quang_tinh/src/screens/home_screen.dart';
 void main() {
   var widget = BlocProvider(
     create: (context) => SearchBloc(),
-    child: MaterialApp(
-      routes: buildRoutes(),
-      home: const SearchScreen(),
+    child: const MaterialApp(
+      onGenerateRoute: Routes.onGenerateRoute,
+      home: SearchScreen(),
     ),
   );
 

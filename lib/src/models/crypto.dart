@@ -40,10 +40,10 @@ class Crypto extends Equatable {
       symbol: json['symbol'],
       name: json['name'],
       image: json['image'],
-      currentPrice: json['current_price'],
-      marketCap: json['market_cap'],
-      marketCapRank: json['market_cap_rank'],
-      priceChangePercentage24h: json['price_change_percentage_24h'],
+      currentPrice: json['current_price']?? 0,
+      marketCap: json['market_cap']?? 0,
+      marketCapRank: json['market_cap_rank']?? 0,
+      priceChangePercentage24h: json['price_change_percentage_24h']?? 0,
     );
   }
 

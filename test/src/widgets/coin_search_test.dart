@@ -36,7 +36,8 @@ main() {
     var widget = MultiBlocProvider(providers: [
       BlocProvider(create: (context) => searchBloc),
       BlocProvider(create: (context) => cryptoDetailBloc)
-    ], child: MaterialApp(routes: buildRoutes(), home: const SearchScreen()));
+    ], child: const MaterialApp(onGenerateRoute: Routes.onGenerateRoute,
+    home: SearchScreen()));
 
     setUp(() {
       cryptoService = MockSearchService();

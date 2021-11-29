@@ -49,6 +49,7 @@ class CryptoCurrencyScreen {
   static const String marketCapHeading = 'Market Cap';
 
   static const String idArgument = 'id';
+  static const String errorWhenListCryptoCurrencyNull = 'CryptoCurrency is NULL' ;
 
   static const cryptoCurrencyHeadingColumns = [
     numberHeading,

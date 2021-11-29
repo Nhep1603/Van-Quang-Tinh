@@ -7,5 +7,9 @@ abstract class CryptoCurrencyService {
 
   CryptoCurrencyService(this.client);
 
+<<<<<<< HEAD
   Future<List<Crypto>>? fetchAllCryptoCurrency();
+=======
+  Future<List<Crypto>>? fetchCryptoCurrency(int page);
+>>>>>>> c11a5712528b53f639beed76fae82a5be6cc08c7
 }

@@ -28,7 +28,7 @@ main() {
   late CategoryService categoryService;
   late CategoryBloc categoryBloc;
   var widget = MaterialApp(
-    routes: buildRoutes(),
+    onGenerateRoute: Routes.onGenerateRoute,
     home: MultiBlocProvider(
         providers: [BlocProvider(create: (context) => categoryBloc)],
         child: const CategoriesScreen()),
