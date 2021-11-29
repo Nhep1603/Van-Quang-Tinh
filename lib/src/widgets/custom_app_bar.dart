@@ -40,7 +40,7 @@ class CustomAppBar extends StatelessWidget {
         ),
         SizedBox(
           width: symbolImageWidth,
-          child: Image.asset(
+          child: Image.network(
             symbolImagePath,
             scale: 2.2,
           ),
