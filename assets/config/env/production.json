@@ -1,7 +1,7 @@
 {
     "ENV": "production",
     "HOST_NAME": "api.coingecko.com",
-    "CRYPTO_PATH": "/api/v3/coins",
+    "CRYPTO_CURRENCY_PATH": "/api/v3/coins",
     "CATEGORY_PATH": "/categories",
     "MARKET_PATH": "/markets",
     "CURRENCY": "vs_currency",
