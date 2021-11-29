@@ -3,21 +3,48 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:van_quang_tinh/src/app.dart';
-import 'package:van_quang_tinh/src/blocs/search/search_bloc.dart';
+import 'package:van_quang_tinh/src/blocs/crypto_currency/crypto_currency_bloc.dart';
 import 'package:van_quang_tinh/src/config/routes.dart';
-import 'package:van_quang_tinh/src/screens/home_screen.dart';
 import 'package:van_quang_tinh/src/constants/constants.dart' as app_constant;
 import 'package:mocktail/mocktail.dart';
+import 'package:van_quang_tinh/src/services/crypto_currency/crypto_currency_service.dart';
 import '../../src/common/common_mock.dart';
 
 void main() {
+
+  NavigatorObserver mockObserver;
+  mockObserver = MockNavigatorObserver();
+
+  setUpAll(() {
+    registerFallbackValue(FakeCryptoCurrencyState());
+    registerFallbackValue(FakeCryptoCurrencyEvent());
+    registerFallbackValue(RouteFake());
+    registerFallbackValue(MyTypeFake());
+  });
+
+  late CryptoCurrencyService cryptoCurrencyService;
+  late CryptoCurrencyBloc cryptoCurrencyBloc;
+
+  setUp(() {
+    cryptoCurrencyService = MockCryptoCurrencyService();
+    cryptoCurrencyBloc = MockCryptoCurrencyBloc();
+  });
+
+  tearDown(() {
+    cryptoCurrencyBloc.close();
+  });
+  
   const colorOfTextAndIndicator = Color(0xff8FC746);
   const labelStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 16);
   final _tabs = ['Cryptocurrency', 'Categories'];
 
-  var widget = const MaterialApp(
-    onGenerateRoute: Routes.onGenerateRoute,
-    home: App(),
+  var widget = BlocProvider(
+    create: (context) => CryptoCurrencyBloc(service: cryptoCurrencyService),
+    child: MaterialApp(
+      onGenerateRoute: Routes.onGenerateRoute,
+      navigatorObservers: [mockObserver],
+      home: App(),
+    ),
   );
 
   group('Tab bar Widget Testing', () {
@@ -144,95 +171,83 @@ void main() {
     });
   });
 
- group('App bar Widget Testing', () {
-  testWidgets('Display Appbar', (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    final appbarFinder = find.byType(AppBar);
-    expect(appbarFinder, findsOneWidget);
-  }
-  );
+  group('App bar Widget Testing', () {
+    testWidgets('Display Appbar', (WidgetTester tester) async {
+      await tester.pumpWidget(widget);
+      final appbarFinder = find.byType(AppBar);
+      expect(appbarFinder, findsOneWidget);
+    });
 
-  testWidgets('Display correctly Appbar\'s height', (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    expect((tester.firstWidget(find.byType(AppBar)) as AppBar).toolbarHeight, 51.00000000000001);
-  }
-  );
+    testWidgets('Display correctly Appbar\'s height',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(widget);
+      expect((tester.firstWidget(find.byType(AppBar)) as AppBar).toolbarHeight,
+          51.00000000000001);
+    });
 
-  testWidgets('Display correctly Appbar\'s backgroundColor', (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    expect((tester.firstWidget(find.byType(AppBar)) as AppBar).backgroundColor, Colors.white);
-  }
-  );
+    testWidgets('Display correctly Appbar\'s backgroundColor',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(widget);
+      expect(
+          (tester.firstWidget(find.byType(AppBar)) as AppBar).backgroundColor,
+          Colors.white);
+    });
 
-  testWidgets('Display search button', (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    final iconFinder = find.byType(IconButton);
-    expect(iconFinder, findsOneWidget);
-    final searchbuttonFinder = ((tester.widget(find.byType(IconButton)) as IconButton).icon as Icon).icon;
-    expect(searchbuttonFinder, Icons.search);
-  }
-  );
+    testWidgets('Display search button', (WidgetTester tester) async {
+      await tester.pumpWidget(widget);
+      final iconFinder = find.byType(IconButton);
+      expect(iconFinder, findsOneWidget);
+      final searchbuttonFinder =
+          ((tester.widget(find.byType(IconButton)) as IconButton).icon as Icon)
+              .icon;
+      expect(searchbuttonFinder, Icons.search);
+    });
 
-  testWidgets('Display correctly search button\'s size', (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    expect((tester.firstWidget(find.byType(IconButton)) as IconButton).iconSize, 21.000000000000004);
-  }
-  );
+    testWidgets('Display correctly search button\'s size',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(widget);
+      expect(
+          (tester.firstWidget(find.byType(IconButton)) as IconButton).iconSize,
+          21.000000000000004);
+    });
 
-  testWidgets('Display correctly search button\'s color', (WidgetTester tester) async{
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen(),));
-    expect((tester.firstWidget(find.byType(IconButton)) as IconButton).color, const Color(app_constant.HomeScreen.searchButtonColor));
-  }
-  );
+    testWidgets('Display correctly search button\'s color',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(widget);
+      expect((tester.firstWidget(find.byType(IconButton)) as IconButton).color,
+          const Color(app_constant.HomeScreen.searchButtonColor));
+    });
 
-  testWidgets('IconButton should be tappable.', (WidgetTester tester) async {
-    bool isTapped = false;
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-        appBar: AppBar(
-        actions: <Widget>[
-            IconButton(
-            alignment: const Alignment(-3, 0),
-            iconSize: 24,
-            color: const Color(app_constant.HomeScreen.searchButtonColor),
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              isTapped = true;
-            },
+    testWidgets('IconButton should be tappable.', (WidgetTester tester) async {
+      bool isTapped = false;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            appBar: AppBar(actions: <Widget>[
+              IconButton(
+                alignment: const Alignment(-3, 0),
+                iconSize: 24,
+                color: const Color(app_constant.HomeScreen.searchButtonColor),
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  isTapped = true;
+                },
+              ),
+            ]),
           ),
-        ]
-      ),
         ),
-      ),
-    );
-    final iconButtonFinder = find.byType(IconButton);
-    await tester.tap(iconButtonFinder);
-    expect(isTapped, true);
-  });
+      );
+      final iconButtonFinder = find.byType(IconButton);
+      await tester.tap(iconButtonFinder);
+      expect(isTapped, true);
+    });
 
-  NavigatorObserver mockObserver;
-  mockObserver = MockNavigatorObserver();
-  setUpAll(() {
-    registerFallbackValue(MyTypeFake());
-  });
-  testWidgets('Navigator push to SearchScreen', (WidgetTester tester) async {
-      await tester.pumpWidget(BlocProvider(
-        create: (context) => SearchBloc(),
-        child: MaterialApp(
-          onGenerateRoute: Routes.onGenerateRoute,
-          home: const HomeScreen(),
-          navigatorObservers: [mockObserver],
-        ),
-      ));
+    testWidgets('Navigator push to SearchScreen', (WidgetTester tester) async {
+      await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
       await tester.tap(find.byType(IconButton));
       await tester.pumpAndSettle();
       verify(() => mockObserver.didPush(any(), any()));
     });
-
-});
-
+  });
 }
-  
-

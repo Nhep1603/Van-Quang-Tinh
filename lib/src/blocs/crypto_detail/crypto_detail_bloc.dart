@@ -1,15 +1,11 @@
 import 'package:bloc/bloc.dart';
 
-<<<<<<< HEAD
-=======
 import '../../models/crypto_detail.dart';
 import '../../models/prices.dart';
 import '../../services/crypto_detail/crypto_detail_service.dart';
 import '../../services/prices/prices_service.dart';
->>>>>>> c11a5712528b53f639beed76fae82a5be6cc08c7
 import './crypto_detail_event.dart';
 import './crypto_detail_state.dart';
-import '../../enum/line_chart_enum.dart';
 
 class CryptoDetailBloc extends Bloc<CryptoDetailEvent, CryptoDetailState> {
   final CryptoDetailService cryptoDetailService;

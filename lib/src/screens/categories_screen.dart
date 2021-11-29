@@ -50,7 +50,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                             title: column,
                           )))
                       .toList(),
-                  rows: state.categories!
+                  rows: state.categories
                       .map((model) => DataRow(cells: [
                             DataCell(Align(
                                 alignment: Alignment.center,

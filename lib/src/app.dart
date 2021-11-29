@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:van_quang_tinh/src/services/crypto_detail/impl_crypto_detail_service.dart';
-import 'package:van_quang_tinh/src/services/prices/impl_prices_service.dart';
 
 import './blocs/crypto_detail/crypto_detail_bloc.dart';
 import './blocs/category/category_bloc.dart';
 import './blocs/search/search_bloc.dart';
+import './blocs/crypto_currency/crypto_currency_bloc.dart';
+import './blocs/crypto_detail_function/crypto_detail_function_bloc.dart';
 import './config/routes.dart';
 import './services/category/category_impl.dart';
 import './services/crypto_currency/crypto_currency_impl.dart';
 import './screens/home_screen.dart';
-import './blocs/crypto_currency/crypto_currency_bloc.dart';
-import './blocs/crypto_detail_function/crypto_detail_function_bloc.dart';
+import './services/crypto_detail/impl_crypto_detail_service.dart';
+import './services/prices/impl_prices_service.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -34,6 +34,14 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               CryptoCurrencyBloc(service: CryptoCurrencyImpl(httpClient)),
+        ),
+        BlocProvider(
+          create: (context) =>
+              CategoryBloc(service: CategoryImpl(httpClient)),
+        ),
+        BlocProvider(
+          create: (context) =>
+              SearchBloc(service: CryptoCurrencyImpl(httpClient)),
         ),
       ],
       child: const MaterialApp(

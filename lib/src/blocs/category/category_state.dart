@@ -21,9 +21,9 @@ class CategoryLoadFailure extends CategoryState {
 class CategoryLoadInProgress extends CategoryState {}
 
 class CategoryLoadSuccess extends CategoryState {
-  final List<Category>? categories;
+  final List<Category> categories;
 
-  CategoryLoadSuccess({this.categories});
+  CategoryLoadSuccess({required this.categories});
 
   @override
   List<Object?> get props => [categories];

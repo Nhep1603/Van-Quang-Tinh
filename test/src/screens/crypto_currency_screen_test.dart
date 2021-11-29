@@ -35,30 +35,7 @@ class FakeCryptoDetailEvent extends Fake implements CryptoDetailEvent {}
 class RouteFake extends Fake implements Route {}
 
 void main() {
-  setUpAll(() {
-    registerFallbackValue(FakeCryptoDetailState());
-    registerFallbackValue(FakeCryptoDetailEvent());
-    registerFallbackValue(RouteFake());
-  });
 
-  late CryptoDetailBloc cryptoDetailBloc;
-
-  setUp(() {
-    cryptoDetailBloc = MockCryptoDetailBloc();
-  });
-
-  tearDown(() {
-    cryptoDetailBloc.close();
-  });
-  var widget = MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => cryptoDetailBloc)],
-      child: const MaterialApp(
-          onGenerateRoute: Routes.onGenerateRoute,
-          home: CryptoCurrencyScreen()));
-  double columnSpacing = 18;
-  double horizontalMargin = 2;
-  double dataRowHeight = 50;
-  double headingRowHeight = 50;
   CustomBindings();
   final mockResponse = json.decode(mockCryptoCurrencyData);
 

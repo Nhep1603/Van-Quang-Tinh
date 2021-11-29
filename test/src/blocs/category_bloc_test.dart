@@ -23,18 +23,24 @@ main() {
   });
 
   blocTest('emits [] when no event is added',
-      build: () => CategoryBloc(), expect: () => []);
+      build: () {
+        categoryService = MockCategoryService();
+        return CategoryBloc(service: categoryService);
+      },
+      expect: () => []);
 
   blocTest(
     'emits [CategoryLoadInProgress] then [CategoryLoadSucess] when [CategoryRequested] is called',
     build: () {
       categoryService = MockCategoryService();
+       when(categoryService.fetchCategory())
+          .thenAnswer((_) async => []);
       return CategoryBloc(service: categoryService);
     },
     act: (CategoryBloc bloc) => bloc.add(CategoryRequested()),
     expect: () => [
       CategoryLoadInProgress(),
-      CategoryLoadSuccess(),
+      CategoryLoadSuccess(categories: const []),
     ],
   );
 
