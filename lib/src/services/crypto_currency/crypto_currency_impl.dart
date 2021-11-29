@@ -1,0 +1,44 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+import '../../config/app_config.dart';
+import '../../config/app_constants.dart';
+import './crypto_currency_service.dart';
+import '../../models/crypto.dart';
+
+class CryptoCurrencyImpl extends CryptoCurrencyService {
+  CryptoCurrencyImpl(http.Client client) : super(client);
+
+  @override
+  Future<List<Crypto>>? fetchAllCryptoCurrency() async {
+    final queryParameters = {
+      AppConfig.instance.getValue(AppConstants.currency):
+          AppConstants.currencyOfMarket,
+    };
+
+    final uri = Uri(
+        scheme: 'https',
+        host: AppConfig.instance.getValue(AppConstants.hostName),
+        path: AppConfig.instance.getValue(AppConstants.cryptoPath) +
+            AppConfig.instance.getValue(AppConstants.marketPath),
+        queryParameters: queryParameters);
+
+    try {
+      var response = await client.get(uri);
+
+      if (response.statusCode == 200) {
+        Iterable responseList = json.decode(response.body);
+
+        var cryptos = List<Crypto>.from(
+            responseList.map((model) => Crypto.fromJson(model)));
+
+        return cryptos;
+      } else {
+        throw Exception('Failed to load crypto list');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+}
