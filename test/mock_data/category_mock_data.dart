@@ -1,4 +1,4 @@
-const String mockCategorysData = r'''[
+const String mockCategoriesData = r'''[
   {
     "id": "1",
     "name": "Smart Contract Platform",

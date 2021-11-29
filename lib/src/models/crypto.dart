@@ -58,4 +58,6 @@ class Crypto extends Equatable {
         marketCapRank,
         priceChangePercentage24h,
       ];
+
+  static where(bool Function(Crypto option) param0) {}
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../config/app_constants.dart';
 import '../constants/constants.dart' as constants;
 import '../screens/categories_screen.dart' as category;
 import '../screens/crypto_currency_screen.dart' as crypto;
-import '../screens/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -37,10 +37,7 @@ class HomeScreen extends StatelessWidget {
                 color: const Color(constants.HomeScreen.searchButtonColor),
                 icon: const Icon(Icons.search),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>const SearchScreen()),
-                  );
+                  Navigator.pushNamed(context, RouteNames.searchScreen);
                 },
               ),
             ],

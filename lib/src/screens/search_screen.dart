@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../constants/constants.dart' as constant;
-import '../models/crypto.dart';
 import '../widgets/coin_search.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({Key? key, this.dataCrypto}) : super(key: key);
-
-  final List<Crypto>? dataCrypto;
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +28,6 @@ class SearchScreen extends StatelessWidget {
               constant.SearchScreen.title,
               style: TextStyle(color: Colors.black),
             )),
-        body: CoinSearch(dataCrypto: dataCrypto));
+        body: const CoinSearch());
   }
 }

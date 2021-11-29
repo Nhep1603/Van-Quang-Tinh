@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
-import './app_constants.dart' as app_constants;
 import '../screens/categories_screen.dart';
 import '../screens/crypto_currency_screen.dart';
-import '../screens/crypto_detail_screen.dart';
 import '../screens/home_screen.dart';
+import './app_constants.dart' as app_constants;
+import '../screens/crypto_detail_screen.dart';
+import '../screens/search_screen.dart';
 
 class Routes {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -24,6 +24,10 @@ class Routes {
       case app_constants.RouteNames.cryptoDetail:
         return MaterialPageRoute(
           builder: (_) => CryptoDetailScreen(settings.arguments as String),
+        );
+      case app_constants.RouteNames.searchScreen:
+        return MaterialPageRoute(
+          builder: (_) => const SearchScreen(),
         );
       default:
         throw Exception();

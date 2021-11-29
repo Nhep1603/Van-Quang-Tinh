@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
 
+import '../constants/constants.dart' as constants;
+
 class Category extends Equatable {
   final String id;
   final String name;
-  final double marketCap;
-  final double marketCapChange24h;
+  final num marketCap;
+  final num marketCapChange24h;
 
   const Category({
     required this.id,
@@ -25,7 +27,7 @@ class Category extends Equatable {
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
       id: json['id'],
-      name: json['name'],
+      name: json['name'] ?? constants.StringConstant.textForNullNameField,
       marketCap: json['market_cap'],
       marketCapChange24h: json['market_cap_change_24h'],
     );
