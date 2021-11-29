@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../enum/line_chart_enum.dart';
+import '../../models/crypto_detail.dart';
+import '../../models/prices.dart';
 
 abstract class CryptoDetailState extends Equatable {
   @override
@@ -22,15 +23,21 @@ class CryptoDetailLoadFailure extends CryptoDetailState {
 
 class CryptoDetailLoadInProgress extends CryptoDetailState {}
 
-class CryptoDetailLoadSucess extends CryptoDetailState {
-  final bool isVoted;
-  final LineChartType lineChartType;
+class CryptoDetailLoadSuccess extends CryptoDetailState {
+  final CryptoDetail cryptoDetail;
+  final Prices prices24H;
+  final Prices prices7D;
 
-  CryptoDetailLoadSucess({
-    required this.isVoted,
-    required this.lineChartType,
+  CryptoDetailLoadSuccess({
+    required this.cryptoDetail,
+    required this.prices24H,
+    required this.prices7D,
   });
 
   @override
-  List<Object> get props => [isVoted, lineChartType];
+  List<Object> get props => [
+        cryptoDetail,
+        prices24H,
+        prices7D,
+      ];
 }

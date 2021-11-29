@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import '../../enum/line_chart_enum.dart';
-
 abstract class CryptoDetailEvent extends Equatable {
   const CryptoDetailEvent();
 
@@ -9,14 +7,13 @@ abstract class CryptoDetailEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CryptoDetailStarted extends CryptoDetailEvent {}
+class CryptoDetailStarted extends CryptoDetailEvent {
+  final String cryptoId;
 
-class CryptoDetailVoted extends CryptoDetailEvent {}
-
-class CryptoDetailLoadedChart extends CryptoDetailEvent {
-  final LineChartType lineChartType;
-  
-  const CryptoDetailLoadedChart({
-    required this.lineChartType,
+  const CryptoDetailStarted({
+    required this.cryptoId,
   });
+
+  @override
+  List<Object> get props => [cryptoId];
 }

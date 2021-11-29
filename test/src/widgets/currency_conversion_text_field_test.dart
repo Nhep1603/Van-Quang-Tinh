@@ -53,7 +53,7 @@ void main() {
         home: Scaffold(
       body: CurrencyConverSionTextField(
         labelText: 'USD',
-        currentCryptoPrice: 66852,
+        hintext: '66852',
         isCrypto: false,
         onChanged: (value) => isChanged = true,
       ),
